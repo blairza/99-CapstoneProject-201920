@@ -17,7 +17,6 @@ def main():
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
 
-
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
