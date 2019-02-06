@@ -21,8 +21,8 @@ def main():
 def run_test_arm():
     robot = rosebot.RoseBot()
     #print('Arm Lowering')
-    #robot.arm_and_claw.lower_arm()
-    #print('Arm Lowered')
+    robot.arm_and_claw.lower_arm()
+    print('Arm Lowered')
     #robot.arm_and_claw.calibrate_arm()
     #print('Arm Calibrated')
     """print('Arm Raising')
