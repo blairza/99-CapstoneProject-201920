@@ -223,7 +223,7 @@ class ArmAndClaw(object):
         The robot must have previously calibrated its Arm.
         """
         position = self.motor.get_position()
-       # if position > desired_arm_position:
+        if position > desired_arm_position:
 
 
 
