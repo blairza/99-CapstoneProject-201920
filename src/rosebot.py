@@ -5,8 +5,8 @@
     -- High-level, general-purpose methods for a Snatch3r EV3 robot.
     -- Lower-level code to interact with the EV3 robot library.
 
-  Author:  Your professors (for the framework and lower-level code)
-    and PUT_YOUR_NAMES_HERE.
+  Author:  Your professors (for the framework and lower-level code) Zane Blair, Ben Hawkins
+  and Trey Kline
   Winter term, 2018-2019.
 """
 

@@ -5,6 +5,7 @@
   Authors:  Your professors (for the framework)
     and Trey Kline.
   Winter term, 2018-2019.
+  NOTE TO ZANE AND BEN: If you edit my program you double homophobic
 """
 
 import mqtt_remote_method_calls as com
