@@ -8,7 +8,7 @@
 import rosebot
 import mqtt_remote_method_calls as com
 import time
-
+import shared_gui_delegate_on_robot as sgd
 
 def main():
     """
@@ -16,7 +16,8 @@ def main():
       1. Makes the EV3 robot to various things.
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
-    run_test_arm()
+    #run_test_arm()
+    capstone()
 
 def run_test_arm():
     robot = rosebot.RoseBot()
@@ -29,6 +30,16 @@ def run_test_arm():
     robot.arm_and_claw.raise_arm()
     print('Arm Raised')"""
     #Raise arm is stuck on the button so it ain't finishing
+
+
+def capstone():
+    rhobert = rosebot.RoseBot()
+    print("This is the Capstone project implementation")
+    receiver = sgd.Receiver(rhobert)
+    mqtt_receiver = com.MqttClient(receiver)
+    mqtt_receiver.connect_to_pc()
+    while True:
+        time.sleep(0.01)
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
