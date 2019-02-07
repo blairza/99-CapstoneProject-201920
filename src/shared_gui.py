@@ -146,6 +146,7 @@ def get_control_frame(window, mqtt_sender):
 
     return frame
 
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -164,6 +165,9 @@ def handle_forward(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
+    print("Forward", left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message("forward", left_entry_box.get(),
+                             right_entry_box.get())
 
 
 def handle_backward(left_entry_box, right_entry_box, mqtt_sender):

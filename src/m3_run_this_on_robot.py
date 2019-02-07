@@ -8,6 +8,7 @@
 import rosebot
 import mqtt_remote_method_calls as com
 import time
+import shared_gui_delegate_on_robot as guid
 
 
 def main():
@@ -16,6 +17,18 @@ def main():
       1. Makes the EV3 robot to various things.
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
+    FinalProject()
+
+
+def FinalProject():
+    robot = rosebot.RoseBot()
+    delegate = guid.Receiver(robot)
+    mqtt_delegate = com.MqttClient(delegate)
+    mqtt_delegate.connect_to_pc()
+
+    while True:
+        time.sleep(.01)
+
 
 
 # -----------------------------------------------------------------------------
