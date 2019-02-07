@@ -177,6 +177,9 @@ def handle_backward(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
+    print("Backward", left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message("backward", [left_entry_box.get(), right_entry_box.get()])
+
 
 def handle_left(left_entry_box, right_entry_box, mqtt_sender):
     """
@@ -186,6 +189,8 @@ def handle_left(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
+    print("Left", left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message("left", [left_entry_box.get(), right_entry_box.get()])
 
 
 def handle_right(left_entry_box, right_entry_box, mqtt_sender):
@@ -196,6 +201,8 @@ def handle_right(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
+    print("Right", left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message("right", [left_entry_box.get(), right_entry_box.get()])
 
 
 def handle_stop(mqtt_sender):
@@ -203,6 +210,8 @@ def handle_stop(mqtt_sender):
     Tells the robot to stop.
       :type  mqtt_sender:  com.MqttClient
     """
+    print("Stop")
+    mqtt_sender.send_message("stop")
 
 
 ###############################################################################
@@ -213,6 +222,8 @@ def handle_raise_arm(mqtt_sender):
     Tells the robot to raise its Arm until its touch sensor is pressed.
       :type  mqtt_sender:  com.MqttClient
     """
+    print("Raise Arm")
+    mqtt_sender.send_message("raise_arm")
 
 
 def handle_lower_arm(mqtt_sender):
@@ -220,6 +231,8 @@ def handle_lower_arm(mqtt_sender):
     Tells the robot to lower its Arm until it is all the way down.
       :type  mqtt_sender:  com.MqttClient
     """
+    print("Lower Arm")
+    mqtt_sender.send_message("lower_arm")
 
 
 def handle_calibrate_arm(mqtt_sender):
@@ -229,6 +242,8 @@ def handle_calibrate_arm(mqtt_sender):
     all the way down, and then to mark taht position as position 0.
       :type  mqtt_sender:  com.MqttClient
     """
+    print("Calibrate The Arm")
+    mqtt_sender.send_message("calibrate_arm")
 
 
 def handle_move_arm_to_position(arm_position_entry, mqtt_sender):
@@ -238,6 +253,8 @@ def handle_move_arm_to_position(arm_position_entry, mqtt_sender):
       :type  arm_position_entry  ttk.Entry
       :type  mqtt_sender:        com.MqttClient
     """
+    print("Move arm to position", arm_position_entry.get())
+    mqtt_sender.send_message("move_arm_to_position", [arm_position_entry.get()])
 
 
 ###############################################################################
@@ -248,6 +265,8 @@ def handle_quit(mqtt_sender):
     Tell the robot's program to stop its loop (and hence quit).
       :type  mqtt_sender:  com.MqttClient
     """
+    print("Stop quit cancel, guys quit")
+    mqtt_sender.send_message("quit")
 
 
 def handle_exit(mqtt_sender):
@@ -256,3 +275,6 @@ def handle_exit(mqtt_sender):
     Then exit this program.
       :type mqtt_sender: com.MqttClient
     """
+    print("Exit")
+    mqtt_sender.send_message("exit")
+
