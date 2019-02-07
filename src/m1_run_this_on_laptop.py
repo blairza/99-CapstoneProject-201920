@@ -57,18 +57,17 @@ def main():
     root.mainloop()
 
 
-
 def get_shared_frames(main_frame, mqtt_sender):
     teleop = shared_gui.get_teleoperation_frame(main_frame, mqtt_sender)
-    arm = shared_gui.get_arm_frame(main_frame,mqtt_sender)
-    control = shared_gui.get_control_frame(main_frame,mqtt_sender)
+    arm = shared_gui.get_arm_frame(main_frame, mqtt_sender)
+    control = shared_gui.get_control_frame(main_frame, mqtt_sender)
     return teleop, arm, control
 
 
 def grid_frames(teleop_frame, arm_frame, control_frame):
-    teleop_frame.grid(row = 0, column = 0)
-    arm_frame.grid(row = 1, column = 0)
-    control_frame(row = 2, column = 0) # This line causes an error that does not allow the GUI to be created
+    teleop_frame.grid(row=0, column=0)
+    arm_frame.grid(row=1, column=0)
+    control_frame.grid(row=2, column=0)
 
 
 # -----------------------------------------------------------------------------
