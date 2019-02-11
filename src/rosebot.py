@@ -34,6 +34,8 @@ class RoseBot(object):
         self.drive_system = DriveSystem(self.sensor_system)
         self.arm_and_claw = ArmAndClaw(self.sensor_system.touch_sensor)
         self.Beeper = Beeper()
+        self.ToneMaker = ToneMaker()
+        self.Spe
 
 
 ###############################################################################
@@ -439,7 +441,7 @@ class Beeper(object):
     def beep(self, number_of_beeps):
         # DCM: Indicate that this is NON-blocking.
         # DCM: Indicate that returns a subprocess.Popen, which has a WAIT method
-        print('I will beep', )
+        print('I will beep', number_of_beeps, 'times' )
         return self._beeper.beep()
 
 
