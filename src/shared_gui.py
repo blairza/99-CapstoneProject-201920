@@ -167,6 +167,51 @@ def get_control_frame(window, mqtt_sender):
     return frame
 
 
+def get_sound_frame(window, mqtt_sender):
+    """
+    Makes a frame for the sound related robot functions
+      :type  window:       ttk.Frame | ttk.Toplevel
+      :type  mqtt_sender:  com.MqttClient
+    """
+
+    #makes the frame
+    frame = ttk.Frame(window, padding=10, borderwidth=5)
+    frame.grid()
+
+    #Constructs frame widgets
+    beep_entry = ttk.Entry(frame, width=5)
+    beep_button = ttk.Button(frame, text="Beep this many times")
+
+    tone_entry_freq = ttk.Entry(frame, width=5)
+    tone_label_freq = ttk.Label(frame, text="Choose Tone Frequency")
+    tone_entry_length = ttk.Entry(frame, width=5)
+    tone_label_length = ttk.Label(frame, text="Choose Tone Duration")
+    tone_button = ttk.Button(frame, text="Play a tone for this frequency and duration")
+
+    speak_entry = ttk.Entry(frame)
+    speak_button = ttk.Button(frame, text="Say this entry")
+
+    #Grid these widgets
+    beep_entry.grid(row=0, column=0)
+    beep_button.grid(row=0, column=2)
+
+    tone_entry_freq.grid(row=1, column=0)
+    tone_label_freq.grid(row=1, column=2)
+
+    tone_label_length.grid(row=2, column=2)
+    tone_entry_length.grid(row=2, column=0)
+
+    tone_button.grid(row=3, column=1)
+
+    speak_entry.grid(row=4, column=0)
+    speak_button.grid(row=4, column=2)
+
+    #set button functions
+    beep_button["command"] = lambda: handle_beep(beep_entry, mqtt_sender)
+    tone_button["command"] = lambda: handle_tone(tone_entry_freq, tone_entry_length, mqtt_sender)
+    speak_button["command"] = lambda: handle_speak(speak_entry, mqtt_sender)
+
+
 
 ###############################################################################
 ###############################################################################
@@ -299,14 +344,34 @@ def handle_exit(mqtt_sender):
     print("Exit")
     mqtt_sender.send_message("exit")
 
+
 def handle_go_straight_for_seconds(seconds,left,mqtt_sender):
     print("Moving for", seconds.get(), "seconds")
     mqtt_sender.send_message("moving",[seconds.get(),left.get()])
+
 
 def handle_go_straight_for_inches_using_time(inches,left,mqtt_sender):
     print("Moving", inches.get(), "inches")
     mqtt_sender.send_message("moving",[inches.get(),left.get()])
 
+
 def handle_go_straight_for_inches_using_encoder(inches,left,mqtt_sender):
     print("Moving", inches.get(),"inches")
     mqtt_sender.send_message("moving",[inches.get(),left.get()])
+
+
+#########
+# Handlers for Sound Frame
+#########
+
+
+def handle_beep(beep_entry, mqtt_sender):
+    mqtt_sender.send_message("beep", [beep_entry.get()])
+
+
+def handle_tone(freq_entry, length_entry, mqtt_sender):
+    mqtt_sender.send_message("tone", [freq_entry.get(), length_entry.get()])
+
+
+def handle_speak(speak_entry, mqtt_sender):
+    mqtt_sender.send_message("speak", [speak_entry.get()])
