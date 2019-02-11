@@ -452,10 +452,17 @@ class ToneMaker(object):
     def tone(self, frequency, duration):
         # DCM: Indicate that this is NON-blocking.
         # DCM: Indicate that returns a subprocess.Popen, which has a WAIT method
+        print('I will play a tone at frequency', frequency ,'for')
         return self._tone_maker.tone(frequency, duration)  # MHz, msec  DCM XXX CTO
 
 
 class SpeechMaker(object):
+    def __init__(self):
+        pass
+
+    def speak(self, phrase):
+        print('I will speke prahse', phrase)
+
     pass
 
 
