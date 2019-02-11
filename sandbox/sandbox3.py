@@ -16,3 +16,6 @@ def say_gurney():
 
 if __name__ == '__main__':
     main()
+
+print('I will beep', number_of_beeps, 'times' )
+print('I will play a tone at frequency', frequency ,'for')

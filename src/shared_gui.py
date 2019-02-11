@@ -342,7 +342,8 @@ def handle_exit(mqtt_sender):
       :type mqtt_sender: com.MqttClient
     """
     print("Exit")
-    mqtt_sender.send_message("exit")
+    handle_quit()
+    exit()
 
 
 def handle_go_straight_for_seconds(seconds,left,mqtt_sender):
