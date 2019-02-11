@@ -71,7 +71,7 @@ class Receiver(object):
     def beep(self, times):
         print('Got beep', times)
         for k in range(int(times)):
-            self.robot.sound_system.beeper.beep()
+            self.robot.sound_system.beeper.beep().wait()
 
 
     def tone(self, freq, length):

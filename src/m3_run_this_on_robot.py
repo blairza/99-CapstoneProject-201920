@@ -28,6 +28,8 @@ def FinalProject():
 
     while True:
         time.sleep(.01)
+        if delegate.is_time_to_stop:
+            break
 
 
 
