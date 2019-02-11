@@ -175,7 +175,7 @@ def get_sound_frame(window, mqtt_sender):
     """
 
     #makes the frame
-    frame = ttk.Frame(window, padding=10, borderwidth=5)
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
 
     #Constructs frame widgets
