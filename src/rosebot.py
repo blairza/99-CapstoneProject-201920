@@ -33,6 +33,9 @@ class RoseBot(object):
         self.sensor_system = SensorSystem()
         self.drive_system = DriveSystem(self.sensor_system)
         self.arm_and_claw = ArmAndClaw(self.sensor_system.touch_sensor)
+        self.Beeper = Beeper()
+        self.ToneMaker = ToneMaker()
+        self.SpeechMaker = SpeechMaker()
 
 
 ###############################################################################
@@ -435,9 +438,10 @@ class Beeper(object):
     def __init__(self):
         self._beeper = ev3.Sound
 
-    def beep(self):
+    def beep(self, number_of_beeps):
         # DCM: Indicate that this is NON-blocking.
         # DCM: Indicate that returns a subprocess.Popen, which has a WAIT method
+        print('I will beep', number_of_beeps, 'times' )
         return self._beeper.beep()
 
 
@@ -448,10 +452,17 @@ class ToneMaker(object):
     def tone(self, frequency, duration):
         # DCM: Indicate that this is NON-blocking.
         # DCM: Indicate that returns a subprocess.Popen, which has a WAIT method
+        print('I will play a tone at frequency', frequency ,'for')
         return self._tone_maker.tone(frequency, duration)  # MHz, msec  DCM XXX CTO
 
 
 class SpeechMaker(object):
+    def __init__(self):
+        pass
+
+    def speak(self, phrase):
+        print('I will speke prahse', phrase)
+
     pass
 
 
