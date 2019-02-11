@@ -11,6 +11,7 @@ class Receiver(object):
     def __init__(self, robot):
         """:type robot: rosebot.RoseBot """
         self.robot = robot
+        self.is_time_to_stop = False
 
     def forward(self, left_wheel_speed, right_wheel_speed):
         print('Got forward', left_wheel_speed, right_wheel_speed)
@@ -50,6 +51,7 @@ class Receiver(object):
 
     def quit(self):
         print('Got quit')
+        self.is_time_to_stop = True
 
     def exit(self):
         print('Got exit')
