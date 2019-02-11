@@ -185,7 +185,7 @@ def get_sound_frame(window, mqtt_sender):
     tone_entry_freq = ttk.Entry(frame, width=5)
     tone_label_freq = ttk.Label(frame, text="Choose Tone Frequency")
     tone_entry_length = ttk.Entry(frame, width=5)
-    tone_label_length = ttk.Label(frame, text="Choose Tone Duration")
+    tone_label_length = ttk.Label(frame, text="Choose Tone Duration in Milliseconds")
     tone_button = ttk.Button(frame, text="Play a tone for this frequency and duration")
 
     speak_entry = ttk.Entry(frame)
