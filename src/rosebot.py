@@ -113,8 +113,8 @@ class DriveSystem(object):
         at the given speed for the given number of inches,
         using the encoder (degrees traveled sensor) built into the motors.
         """
-        self.go(speed,speed)
         self.left_motor.reset_position()
+        self.go(speed,speed)
         while True:
             if self.left_motor.get_position() >= (inches/(1.3*math.pi))*360:
                 self.stop()
