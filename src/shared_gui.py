@@ -47,6 +47,14 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_button = ttk.Button(frame, text="Right")
     stop_button = ttk.Button(frame, text="Stop")
 
+    inches_label = ttk.Label(frame, text="Inches")
+    seconds_label = ttk.Label(frame, text="Seconds")
+    seconds_entry = ttk.Entry(frame, width=8)
+    go_straight_for_seconds_button = ttk.Button(frame, text="Make robot move for a number of seconds")
+    inches_entry = ttk.Entry(frame, width=8)
+    go_straight_for_inches_using_time_button = ttk.Button(frame, text="Make robot move a number of inches using time")
+    go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Make robot move a number of inches using encoder")
+
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
     left_speed_label.grid(row=1, column=0)
@@ -60,6 +68,14 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_button.grid(row=4, column=2)
     backward_button.grid(row=5, column=1)
 
+    seconds_label.grid(row=6, column=0)
+    seconds_entry.grid(row=8, column=0)
+    go_straight_for_seconds_button.grid(row=8, column=2)
+    inches_label.grid(row=9, column=1)
+    inches_entry.grid(row=10, column=1)
+    go_straight_for_inches_using_time_button.grid(row=11, column=0)
+    go_straight_for_inches_using_encoder_button.grid(row=11, column=2)
+
     # Set the button callbacks:
     forward_button["command"] = lambda: handle_forward(
         left_speed_entry, right_speed_entry, mqtt_sender)
@@ -70,6 +86,10 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_button["command"] = lambda: handle_right(
         left_speed_entry, right_speed_entry, mqtt_sender)
     stop_button["command"] = lambda: handle_stop(mqtt_sender)
+
+    go_straight_for_seconds_button["command"] = lambda: handle_go_straight_for_seconds(seconds_entry, left_speed_entry,mqtt_sender)
+    go_straight_for_inches_using_time_button["command"] = lambda: handle_go_straight_for_inches_using_time(inches_entry,left_speed_entry,mqtt_sender)
+    go_straight_for_inches_using_encoder_button["command"] = lambda: handle_go_straight_for_inches_using_encoder(inches_entry,left_speed_entry, mqtt_sender)
 
     return frame
 
@@ -147,30 +167,7 @@ def get_control_frame(window, mqtt_sender):
     return frame
 
 
-def get_drive_system_frame(window, mqtt_sender):
-        frame = ttk.Frame(window, padding=10, borderwidth = 5, relief="ridge")
-        frame.grid()
 
-        frame_label = ttk.Label(frame, text="Drive System")
-        inches_label = ttk.Label(frame, text="Inches")
-        seconds_label =ttk.Label(frame,text="Seconds")
-        seconds_entry = ttk.Entry(frame,width=8)
-        go_straight_for_seconds_button = ttk.Button(frame, text="Make robot move for a number of seconds")
-        inches_entry = ttk.Entry(frame,width=8)
-        go_straight_for_inches_using_time_button = ttk.Button(frame, text="Make robot move a number of inches using time")
-        go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Make robot move a number of inches using encoder")
-
-
-        frame_label.grid(row=0,column=1)
-        seconds_label.grid(row=1,column=0)
-        seconds_entry.grid(row=2,column=0)
-        go_straight_for_seconds_button.grid(row=2,column=2)
-        inches_label.grid(row=3,column=1)
-        inches_entry.grid(row=4,column=1)
-        go_straight_for_inches_using_time_button.grid(row=5,column=0)
-        go_straight_for_inches_using_encoder_button.grid(row=5,column=2)
-
-        return frame
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -302,3 +299,14 @@ def handle_exit(mqtt_sender):
     print("Exit")
     mqtt_sender.send_message("exit")
 
+def handle_go_straight_for_seconds(seconds,left,mqtt_sender):
+    print("Moving for", seconds.get(), "seconds")
+    mqtt_sender.send_message("moving",[seconds.get(),left.get()])
+
+def handle_go_straight_for_inches_using_time(inches,left,mqtt_sender):
+    print("Moving", inches.get(), "inches")
+    mqtt_sender.send_message("moving",[inches.get(),left.get()])
+
+def handle_go_straight_for_inches_using_encoder(inches,left,mqtt_sender):
+    print("Moving", inches.get(),"inches")
+    mqtt_sender.send_message("moving",[inches.get(),left.get()])
