@@ -26,6 +26,8 @@ def capstone():
     mqtt_receiver.connect_to_pc()
     while True:
         time.sleep(0.01)
+        if(receiver.is_time_to_stop):
+            break
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
