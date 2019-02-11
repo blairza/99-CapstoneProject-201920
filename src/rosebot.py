@@ -463,7 +463,6 @@ class SpeechMaker(object):
     def speak(self, phrase):
         print('I will speke prahse', phrase)
 
-    pass
 
 
 class SongMaker(object):

@@ -55,13 +55,16 @@ class Receiver(object):
         print('Got exit')
 
     def go_straight_for_seconds(self, seconds, speed):
+        print('Got go straight for seconds:', seconds)
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
 
     def go_straight_for_inches_using_time(self, inches, speed):
+        print('Got go straight for inches using time', inches)
         self.robot.drive_system.go_straight_for_inches_using_time(inches, speed)
 
-    def go_straight_for_inches_using_encoder(self):
-        self.go_straight_for_inches_using_encoder()
+    def go_straight_for_inches_using_encoder(self, inches):
+        print('Got go straight for inches using encoder', )
+        self.robot.drive_system.go_straight_for_inches_using_encoder(inches)
 
     def beep(self, times):
         self.robot.Beeper.beep(times)
