@@ -11,7 +11,6 @@ class Receiver(object):
     def __init__(self, robot):
         """:type robot: rosebot.RoseBot """
         self.robot = robot
-        self.is_time_to_stop = False
 
     def forward(self, left_wheel_speed, right_wheel_speed):
         print('Got forward', left_wheel_speed, right_wheel_speed)
@@ -51,7 +50,6 @@ class Receiver(object):
 
     def quit(self):
         print('Got quit')
-        self.is_time_to_stop = True
 
     def exit(self):
         print('Got exit')
@@ -70,12 +68,14 @@ class Receiver(object):
 
     def beep(self, times):
         print('Got beep', times)
-        self.robot.Beeper.beep(int(times))
+        for k in range(int(times)):
+            self.robot.sound_system.beeper.beep()
+
 
     def tone(self, freq, length):
         print('Got tone', length)
-        self.robot.ToneMaker.tone(int(freq), int(length))
+        self.robot.sound_system.tone_maker.play_tone(int(freq), int(length))
 
     def speak(self, string):
         print('Got speak',string)
-        self.robot.SpeechMaker.speak(string)
+        self.robot.sound_system.speech_maker.speak(string)
