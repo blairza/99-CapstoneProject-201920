@@ -35,7 +35,7 @@ class RoseBot(object):
         self.arm_and_claw = ArmAndClaw(self.sensor_system.touch_sensor)
         self.Beeper = Beeper()
         self.ToneMaker = ToneMaker()
-        self.Spe
+        self.SpeechMaker = SpeechMaker()
 
 
 ###############################################################################
