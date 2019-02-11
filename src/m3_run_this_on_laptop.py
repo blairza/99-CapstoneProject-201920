@@ -76,7 +76,6 @@ def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame):
     sound_frame.grid(row=3, column=0)
 
 
-
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

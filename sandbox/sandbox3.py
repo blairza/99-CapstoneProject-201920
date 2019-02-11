@@ -3,3 +3,16 @@
 """This is Ben's Sandbox"""
 
 # Combination: locker 2, 18, 28, 10
+
+
+def main():
+    say_gurney()
+
+
+def say_gurney():
+    while True:
+        print("gurney",end="")
+
+
+if __name__ == '__main__':
+    main()
