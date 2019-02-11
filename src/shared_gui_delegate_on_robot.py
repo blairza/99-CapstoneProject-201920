@@ -63,6 +63,11 @@ class Receiver(object):
     def go_straight_for_inches_using_encoder(self):
         self.go_straight_for_inches_using_encoder()
 
+    def beep(self, times):
+        self.robot.Beeper.beep(times)
 
+    def tone(self, freq, length):
+        self.robot.ToneMaker.tone(freq, length)
 
-
+    def speak(self, string):
+        self.robot.SpeechMaker.speak(string)
