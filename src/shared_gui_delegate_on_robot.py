@@ -56,21 +56,24 @@ class Receiver(object):
 
     def go_straight_for_seconds(self, seconds, speed):
         print('Got go straight for seconds:', seconds)
-        self.robot.drive_system.go_straight_for_seconds(seconds, speed)
+        self.robot.drive_system.go_straight_for_seconds(int(seconds), int(speed))
 
     def go_straight_for_inches_using_time(self, inches, speed):
         print('Got go straight for inches using time', inches)
-        self.robot.drive_system.go_straight_for_inches_using_time(inches, speed)
+        self.robot.drive_system.go_straight_for_inches_using_time(int(inches), int(speed))
 
     def go_straight_for_inches_using_encoder(self, inches):
         print('Got go straight for inches using encoder', )
-        self.robot.drive_system.go_straight_for_inches_using_encoder(inches)
+        self.robot.drive_system.go_straight_for_inches_using_encoder(int(inches))
 
     def beep(self, times):
-        self.robot.Beeper.beep(times)
+        print('Got beep', times)
+        self.robot.Beeper.beep(int(times))
 
     def tone(self, freq, length):
-        self.robot.ToneMaker.tone(freq, length)
+        print('Got tone', length)
+        self.robot.ToneMaker.tone(int(freq), int(length))
 
     def speak(self, string):
+        print('Got speak',string)
         self.robot.SpeechMaker.speak(string)
