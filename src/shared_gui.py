@@ -147,6 +147,30 @@ def get_control_frame(window, mqtt_sender):
     return frame
 
 
+def get_drive_system_frame(window, mqtt_sender):
+        frame = ttk.Frame(window, padding=10, borderwidth = 5, relief="ridge")
+        frame.grid()
+
+        frame_label = ttk.Label(frame, text="Drive System")
+        inches_label = ttk.Label(frame, text="Inches")
+        seconds_label =ttk.Label(frame,text="Seconds")
+        seconds_entry = ttk.Entry(frame,width=8)
+        go_straight_for_seconds_button = ttk.Button(frame, text="Make robot move for a number of seconds")
+        inches_entry = ttk.Entry(frame,width=8)
+        go_straight_for_inches_using_time_button = ttk.Button(frame, text="Make robot move a number of inches using time")
+        go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Make robot move a number of inches using encoder")
+
+
+        frame_label.grid(row=0,column=1)
+        seconds_label.grid(row=1,column=0)
+        seconds_entry.grid(row=2,column=0)
+        go_straight_for_seconds_button.grid(row=2,column=2)
+        inches_label.grid(row=3,column=1)
+        inches_entry.grid(row=4,column=1)
+        go_straight_for_inches_using_time_button.grid(row=5,column=0)
+        go_straight_for_inches_using_encoder_button.grid(row=5,column=2)
+
+        return frame
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
