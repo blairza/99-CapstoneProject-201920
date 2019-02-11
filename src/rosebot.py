@@ -112,8 +112,9 @@ class DriveSystem(object):
         """
         self.go(speed,speed)
         while True:
-            if self.left_motor.get_position() >= (inches/1.3*math.pi)*360:
+            if self.left_motor.get_position() >= (inches/(1.3*math.pi))*360:
                 self.stop()
+                break
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the color sensor.

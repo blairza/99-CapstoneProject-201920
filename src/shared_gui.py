@@ -347,17 +347,17 @@ def handle_exit(mqtt_sender):
 
 def handle_go_straight_for_seconds(seconds,left,mqtt_sender):
     print("Moving for", seconds.get(), "seconds")
-    mqtt_sender.send_message("moving",[seconds.get(),left.get()])
+    mqtt_sender.send_message("go_straight_for_seconds",[seconds.get(),left.get()])
 
 
 def handle_go_straight_for_inches_using_time(inches,left,mqtt_sender):
     print("Moving", inches.get(), "inches")
-    mqtt_sender.send_message("moving",[inches.get(),left.get()])
+    mqtt_sender.send_message("go_straight_for_inches_using_time",[inches.get(),left.get()])
 
 
 def handle_go_straight_for_inches_using_encoder(inches,left,mqtt_sender):
     print("Moving", inches.get(),"inches")
-    mqtt_sender.send_message("moving",[inches.get(),left.get()])
+    mqtt_sender.send_message("go_straight_for_inches_using_encoder",[inches.get(),left.get()])
 
 
 #########
