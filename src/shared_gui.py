@@ -211,7 +211,7 @@ def get_sound_frame(window, mqtt_sender):
     tone_button["command"] = lambda: handle_tone(tone_entry_freq, tone_entry_length, mqtt_sender)
     speak_button["command"] = lambda: handle_speak(speak_entry, mqtt_sender)
 
-
+    return frame
 
 ###############################################################################
 ###############################################################################
