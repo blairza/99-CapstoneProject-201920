@@ -251,7 +251,7 @@ class ArmAndClaw(object):
         Constructs the Arm's motor.
           :type  touch_sensor:  TouchSensor
         """
-        self.touch_sensor = touch_sensor
+        self.touch_sensor = TouchSensor()
         self.motor = Motor('A', motor_type='medium')
 
     def raise_arm(self):

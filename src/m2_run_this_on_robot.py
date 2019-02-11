@@ -15,7 +15,10 @@ def main():
     This code, which must run on the EV3 ROBOT:
       1. Makes the EV3 robot to various things.
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
+
     """
+    big_boy_code()
+
 def big_boy_code():
     gurney_bot = rosebot.RoseBot()
     receiver = rec.Receiver(gurney_bot)
@@ -23,6 +26,8 @@ def big_boy_code():
     mqtt_receiver.connect_to_pc()
     while True:
         time.sleep(0.01)
+        if receiver.is_time_to_stop:
+            break;
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
