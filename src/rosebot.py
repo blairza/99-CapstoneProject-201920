@@ -71,6 +71,7 @@ class DriveSystem(object):
         self.sensor_system = sensor_system
         self.left_motor = Motor('B')
         self.right_motor = Motor('C')
+        self.color_sensor = ColorSensor()
 
         self.wheel_circumference = 1.3 * math.pi
 
@@ -129,12 +130,22 @@ class DriveSystem(object):
         Goes straight at the given speed until the intensity returned
         by the color_sensor is less than the given intensity.
         """
+        self.go(speed,speed)
+        while True:
+            if(self.color_sensor.get_reflected_light_intensity() < intensity):
+                self.stop()
+                break
 
     def go_straight_until_intensity_is_greater_than(self, intensity, speed):
         """
         Goes straight at the given speed until the intensity returned
         by the color_sensor is greater than the given intensity.
         """
+        self.go(speed, speed)
+        while True:
+            if (self.color_sensor.get_reflected_light_intensity() > intensity):
+                self.stop()
+                break
 
     def go_straight_until_color_is(self, color, speed):
         """
@@ -149,6 +160,11 @@ class DriveSystem(object):
         then use the   get_color_as_name   method to access
         the color sensor's color.
         """
+        self.go(speed, speed)
+        while True:
+            if (self.color_sensor.get_reflected_light_intensity() == color):
+                self.stop()
+                break
 
     def go_straight_until_color_is_not(self, color, speed):
         """
@@ -158,6 +174,11 @@ class DriveSystem(object):
         Colors can be integers from 0 to 7 or any of the strings
         listed in the ColorSensor class.
         """
+        self.go(speed, speed)
+        while True:
+            if (self.color_sensor.get_reflected_light_intensity() != color):
+                self.stop()
+                break
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared proximity sensor.
