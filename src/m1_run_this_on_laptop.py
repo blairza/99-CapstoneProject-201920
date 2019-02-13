@@ -45,7 +45,25 @@ def main():
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
-    # TODO: Implement and call get_my_frames(...)
+    # Currently Going: Implement and call get_my_frames(...)
+    windher = tkinter.Tk()
+    windher.title('Personal Frames')
+    frame_me = ttk.Frame(windher,padding=10,borderwidth=5,relief = "groove")
+    frame_me.grid()
+
+    frame_label = ttk.Label(frame_me,text= "Beep and move towards objects")
+    beep_frequency = ttk.Entry(frame_me,width=5)
+    beep_freq_label = ttk.Label(frame_me,text="Frequence of beeps")
+    beep_drop = ttk.Entry(frame_me,width=5)
+    beep_drop_label = ttk.Label(frame_me,text="Increasing frequency number")
+    beep_move_button = ttk.Button(frame_me,text="Make robot beep and move")
+
+    frame_label.grid(row=0,column=1)
+    beep_drop.grid(row=2,column=0)
+    beep_drop_label.grid(row=1,column=0)
+    beep_frequency.grid(row=2,column=2)
+    beep_freq_label.grid(row=1,column=2)
+    beep_move_button.grid(row=3,column=1)
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
@@ -55,6 +73,7 @@ def main():
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+    windher.mainloop()
 
 
 def get_shared_frames(main_frame, mqtt_sender):

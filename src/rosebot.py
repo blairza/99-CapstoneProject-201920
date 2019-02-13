@@ -69,7 +69,6 @@ class DriveSystem(object):
         self.sensor_system = sensor_system
         self.left_motor = Motor('B')
         self.right_motor = Motor('C')
-        self.color_sensor = ColorSensor()
 
         self.wheel_circumference = 1.3 * math.pi
 
@@ -130,7 +129,7 @@ class DriveSystem(object):
         """
         self.go(speed,speed)
         while True:
-            if(self.color_sensor.get_reflected_light_intensity() < intensity):
+            if(self.sensor_system.color_sensor.get_reflected_light_intensity() < intensity):
                 self.stop()
                 break
 
@@ -141,7 +140,7 @@ class DriveSystem(object):
         """
         self.go(speed, speed)
         while True:
-            if (self.color_sensor.get_reflected_light_intensity() > intensity):
+            if (self.sensor_system.color_sensor.get_reflected_light_intensity() > intensity):
                 self.stop()
                 break
 
@@ -160,7 +159,7 @@ class DriveSystem(object):
         """
         self.go(speed, speed)
         while True:
-            if (self.color_sensor.get_reflected_light_intensity() == color):
+            if (self.sensor_system.color_sensor.get_reflected_light_intensity() == color):
                 self.stop()
                 break
 
@@ -174,7 +173,7 @@ class DriveSystem(object):
         """
         self.go(speed, speed)
         while True:
-            if (self.color_sensor.get_reflected_light_intensity() != color):
+            if (self.sensor_system.color_sensor.get_reflected_light_intensity() != color):
                 self.stop()
                 break
 
