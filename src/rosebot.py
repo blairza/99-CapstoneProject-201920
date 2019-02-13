@@ -186,6 +186,17 @@ class DriveSystem(object):
         Goes forward at the given speed until the robot is less than
         the given number of inches from the nearest object that it senses.
         """
+        self.go(speed, speed)
+
+        while True:
+            ave = 0
+            for k in range(8):
+                ave = ave + self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+            ave = ave/8
+
+            if ave <= inches:
+                self.stop()
+                break
 
     def go_backward_until_distance_is_greater_than(self, inches, speed):
         """
@@ -194,7 +205,19 @@ class DriveSystem(object):
         Assumes that it senses an object when it starts.
         """
 
-    def go_until_distance_is_within(self, delta_inches, speed):
+        self.go(-speed, -speed)
+
+        while True:
+            ave = 0
+            for k in range(8):
+                ave = ave + self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+            ave = ave / 8
+
+            if ave >= inches:
+                self.stop()
+                break
+
+    def go_until_distance_is_within(self, delta, inches, speed):
         """
         Goes forward or backward, repeated as necessary, until the robot is
         within the given delta of the given inches from the nearest object
@@ -204,6 +227,22 @@ class DriveSystem(object):
         the robot should move until it is between 6.8 and 7.4 inches
         from the object.
         """
+        while True:
+            self.go(speed, speed)
+            ave = 0
+            for k in range(8):
+                ave = ave + self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+            ave = ave / 8
+
+            if ave > inches+delta:
+                self.go(-speed, -speed)
+            if ave < inches-delta:
+                self.go(speed, speed)
+            if ave <= inches+delta and ave >= inches-delta:
+                self.stop()
+                break
+
+
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared beacon sensor.
