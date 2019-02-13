@@ -213,6 +213,43 @@ def get_sound_frame(window, mqtt_sender):
 
     return frame
 
+def get_color_frame(window,mqtt_sender):
+    frame = ttk.Frame(window,padding=10,borderwidth =5, relief= "ridge")
+    frame.grid()
+
+    title = ttk.Label(frame,text="Color Sensor")
+    speed_entry = ttk.Entry(frame,width=5)
+    speed_label = ttk.Label(frame,text="Speed to move at")
+    color_entry = ttk.Entry(frame,width=5)
+    color_label = ttk.Label(frame,text = "Color to detect")
+    intensity_entry = ttk.Entry(frame,width=5)
+    intensity_label = ttk.Label(frame,text = "Intensity to check for")
+
+    is_color_button = ttk.Button(frame,text="Move robot until it reaches entered color")
+    is_not_color_button = ttk.Button(frame,text = "Move robot until it is off of entered color")
+    greater_than_button = ttk.Button(frame,text="Move robot until color intensity is greater than entered intensity")
+    less_than_button = ttk.Button(frame,text="Move robot until color intensity is less than entered intensity")
+
+    title.grid(row=0,column=1)
+    speed_label.grid(row=1,column=0)
+    speed_entry.grid(row=2,column=0)
+    color_label.grid(row=1,column=1)
+    color_entry.grid(row=2,column=1)
+    intensity_label.grid(row=1,column=2)
+    intensity_entry.grid(row=2,column=2)
+
+    is_color_button.grid(row=3,column=1)
+    is_not_color_button.grid(row=4,column=1)
+    greater_than_button.grid(row=5,column=1)
+    less_than_button.grid(row=6,column=1)
+
+    is_color_button["command"] = lambda: handle_is_color(speed_entry,color_entry,mqtt_sender)
+    is_not_color_button["command"] = lambda: handle_is_not_color(speed_entry,color_entry,mqtt_sender)
+    greater_than_button["command"] = lambda: handle_greater_than(speed_entry,intensity_entry,mqtt_sender)
+    less_than_button["command"] = lambda: handle_less_than(speed_entry,intensity_entry,mqtt_sender)
+
+    return frame
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -376,3 +413,18 @@ def handle_tone(freq_entry, length_entry, mqtt_sender):
 
 def handle_speak(speak_entry, mqtt_sender):
     mqtt_sender.send_message("speak", [speak_entry.get()])
+
+########
+# Handlers for Color Frame
+########
+def handle_is_color(speed_entry,color_entry,mqtt_sender):
+    mqtt_sender.send_message("is color",[speed_entry.get(),color_entry.get()])
+
+def handle_is_not_color(speed_entry,color_entry,mqtt_sender):
+    mqtt_sender.send_message("is not color",[speed_entry.get(),color_entry.get()])
+
+def handle_greater_than(speed_entry,intensity_entry,mqtt_sender):
+    mqtt_sender.send_message("greater",[speed_entry.get(),intensity_entry.get()])
+
+def handle_less_than(speed_entry,intensity_entry,mqtt_sender):
+    mqtt_sender.send_message("less",[speed_entry.get(),intensity_entry.get()])
