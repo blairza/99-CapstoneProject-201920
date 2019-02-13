@@ -93,6 +93,39 @@ def get_teleoperation_frame(window, mqtt_sender):
 
     return frame
 
+def get_proximity_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='Proximity Sensor')
+    forward_button = ttk.Label(frame, text='Go forward until distance is less than')
+    forward_entry = ttk.Entry(frame, width=8)
+
+    backward_button = ttk.Label(frame, text='Go backward until distance is greater than')
+    backward_entry = ttk.Entry(frame, width=8)
+
+    delta_button = ttk.Label(frame, text='Go until distance is within')
+    delta_entry = ttk.Entry(frame, width=8)
+    delta_distance_entry = ttk.Entry(frame, width=8)
+
+    speed_label = ttk.Label(frame, text='Speed')
+    speed_entry = ttk.Entry(frame, width=8)
+
+    frame_label.grid(row=0, column=1)
+    forward_button.grid(row=1, column=0)
+    forward_entry.grid(row=1, column=2)
+    backward_button.grid(row=2, column=0)
+    backward_entry.grid(row=2, column=2)
+    delta_button.grid(row=3, column=0)
+    delta_distance_entry.grid(row=3, column=1)
+    delta_entry.grid(row=3, column=2)
+    speed_label.grid(row=4, column=0)
+    speed_entry.grid(row=4, column=1)
+
+
+    forward_button["command"] = lambda: handle_go_forward_until_distance_is_less_than(forward_entry.get(), speed_entry.get(), mqtt_sender)
+    backward_button["command"] = lambda : handle_go_backward_until_distance_is_greater_than(backward_entry.get(), speed_entry.get(), mqtt_sender)
+    delta_button["command"] = lambda : handle_go_until_distance_is_within(delta_entry.get(), delta_distance_entry.get(), speed_entry.get(), mqtt_sender)
 
 def get_arm_frame(window, mqtt_sender):
     """
@@ -428,3 +461,16 @@ def handle_greater_than(speed_entry,intensity_entry,mqtt_sender):
 
 def handle_less_than(speed_entry,intensity_entry,mqtt_sender):
     mqtt_sender.send_message("less",[speed_entry.get(),intensity_entry.get()])
+
+###################3
+#Handlers for Proximity Sensor Frame
+####################
+
+def handle_go_forward_until_distance_is_less_than(distance_entry, speed_entry, mqtt_sender):
+    mqtt_sender.send_message('go_forward_until_distance_is_less_than', [distance_entry, speed_entry])
+
+def handle_go_backward_until_distance_is_greater_than(distance_entry, speed_entry, mqtt_sender):
+    mqtt_sender.send_message('go_backward_until_distance_is_greater_than', [distance_entry, speed_entry, mqtt_sender])
+
+def handle_go_until_distance_is_within(delta_entry, distance_entry,  speed_entry, mqtt_sender):
+    mqtt_sender.send_message('go_until_distance_is_within', [delta_entry, distance_entry, speed_entry])
