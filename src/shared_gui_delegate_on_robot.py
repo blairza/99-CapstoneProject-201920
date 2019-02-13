@@ -96,3 +96,15 @@ class Receiver(object):
     def less(self,speed,intensity):
         print('Got intensity', intensity)
         self.robot.drive_system.go_straight_until_intensity_is_less_than(intensity,speed)
+
+    def go_forward_until_distance_is_less_than(self, inches, speed):
+        print('Got Inches and Speed for Go forward until distance is less than', inches, speed)
+        self.robot.drive_system.go_forward_until_distance_is_less_than(inches, speed)
+
+    def go_backward_until_distance_is_greater_than(self, inches, speed):
+        print('Got Inches and Speed for Go backward until distance is greater than', inches, speed)
+        self.robot.drive_system.go_backward_until_distance_is_greater_than(inches, speed)
+
+    def go_until_distance_is_within(self, delta, inches, speed):
+        print('Got Delta, Inches, and Speed for Go until distance is within', delta, inches, speed)
+        self.robot.drive_system.go_until_distance_is_within(delta, inches, speed)
