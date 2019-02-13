@@ -73,7 +73,6 @@ class Receiver(object):
         for k in range(int(times)):
             self.robot.sound_system.beeper.beep().wait()
 
-
     def tone(self, freq, length):
         print('Got tone', length)
         self.robot.sound_system.tone_maker.play_tone(int(freq), int(length))
@@ -81,3 +80,19 @@ class Receiver(object):
     def speak(self, string):
         print('Got speak',string)
         self.robot.sound_system.speech_maker.speak(string)
+
+    def is_color(self,speed,color):
+        print('Got color', color)
+        self.robot.drive_system.go_straight_until_color_is(color,speed)
+
+    def is_not_color(self,speed,color):
+        print('Got color', color)
+        self.robot.drive_system.go_straight_until_color_is_not(color,speed)
+
+    def greater(self,speed,intensity):
+        print('Got intensity', intensity)
+        self.robot.drive_system.go_straight_until_intensity_is_greater_than(intensity,speed)
+
+    def less(self,speed,intensity):
+        print('Got intensity', intensity)
+        self.robot.drive_system.go_straight_until_intensity_is_less_than(intensity,speed)

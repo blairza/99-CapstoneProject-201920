@@ -418,10 +418,10 @@ def handle_speak(speak_entry, mqtt_sender):
 # Handlers for Color Frame
 ########
 def handle_is_color(speed_entry,color_entry,mqtt_sender):
-    mqtt_sender.send_message("is color",[speed_entry.get(),color_entry.get()])
+    mqtt_sender.send_message("is_color",[speed_entry.get(),color_entry.get()])
 
 def handle_is_not_color(speed_entry,color_entry,mqtt_sender):
-    mqtt_sender.send_message("is not color",[speed_entry.get(),color_entry.get()])
+    mqtt_sender.send_message("is_not_color",[speed_entry.get(),color_entry.get()])
 
 def handle_greater_than(speed_entry,intensity_entry,mqtt_sender):
     mqtt_sender.send_message("greater",[speed_entry.get(),intensity_entry.get()])
