@@ -98,13 +98,13 @@ def get_proximity_frame(window, mqtt_sender):
     frame.grid()
 
     frame_label = ttk.Label(frame, text='Proximity Sensor')
-    forward_button = ttk.Label(frame, text='Go forward until distance is less than')
+    forward_button = ttk.Button(frame, text='Go forward until distance is less than')
     forward_entry = ttk.Entry(frame, width=8)
 
-    backward_button = ttk.Label(frame, text='Go backward until distance is greater than')
+    backward_button = ttk.Button(frame, text='Go backward until distance is greater than')
     backward_entry = ttk.Entry(frame, width=8)
 
-    delta_button = ttk.Label(frame, text='Go until distance is within')
+    delta_button = ttk.Button(frame, text='Go until distance is within')
     delta_entry = ttk.Entry(frame, width=8)
     delta_distance_entry = ttk.Entry(frame, width=8)
 
