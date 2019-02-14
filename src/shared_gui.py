@@ -127,6 +127,8 @@ def get_proximity_frame(window, mqtt_sender):
     backward_button["command"] = lambda : handle_go_backward_until_distance_is_greater_than(backward_entry.get(), speed_entry.get(), mqtt_sender)
     delta_button["command"] = lambda : handle_go_until_distance_is_within(delta_entry.get(), delta_distance_entry.get(), speed_entry.get(), mqtt_sender)
 
+    return frame
+
 def get_arm_frame(window, mqtt_sender):
     """
     Constructs and returns a frame on the given window, where the frame
