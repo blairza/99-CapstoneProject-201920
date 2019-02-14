@@ -12,8 +12,6 @@ import mqtt_remote_method_calls as com
 import shared_gui
 import tkinter
 from tkinter import ttk
-import m1_run_this_on_robot
-m1_run_this_on_robot.
 
 def main():
     """
@@ -42,7 +40,7 @@ def main():
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
-    teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame = get_shared_frames(main_frame, mqtt_sender)
+    teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame = get_shared_frames(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
@@ -53,7 +51,7 @@ def main():
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    grid_frames(teleop_frame, arm_frame, control_frame)
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame)
 
     # -------------------------------------------------------------------------
     # The event loop:
@@ -68,12 +66,17 @@ def get_shared_frames(main_frame, mqtt_sender):
     sound_frame = shared_gui.get_sound_frame(main_frame, mqtt_sender)
     color_frame = shared_gui.get_color_frame(main_frame, mqtt_sender)
     proximity_frame = shared_gui.get_proximity_frame(main_frame, mqtt_sender)
-    return teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame
+    camera_frame = shared_gui.get_camera_frame(main_frame, mqtt_sender)
+    return teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame
 
-def grid_frames(teleop_frame, arm_frame, control_frame):
+def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame):
     teleop_frame.grid(row=0, column=0)
     arm_frame.grid(row=1, column=0)
     control_frame.grid(row=2, column=0)
+    sound_frame.grid(row=3, column=0)
+    color_frame.grid(row=4, column=0)
+    proximity_frame.grid(row=5, column=0)
+    camera_frame.grid(row=0, column=1)
 
 def get_my_frames(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
@@ -99,7 +102,8 @@ def get_my_frames(window, mqtt_sender):
 
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())
-    mqtt_sender.send_message('find_object_ir', [self.robot, freq.get(), ])
+    mqtt_sender.send_message('find_object_ir', [freq.get(), rate.get()])
+
 
 
 # -----------------------------------------------------------------------------

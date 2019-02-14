@@ -132,3 +132,6 @@ class Receiver(object):
         print("Got spin")
         m1_extra.spin(self,direction,speed)
 
+    def m2_find_object_ir(self, freq, rate):
+        print('Got find object ir')
+        m2_extra.find_object_ir(self.robot, freq, rate)
