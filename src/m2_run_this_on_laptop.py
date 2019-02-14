@@ -41,6 +41,7 @@ def main():
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
     teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame = get_shared_frames(main_frame, mqtt_sender)
+    find_object = get_my_frames(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
@@ -51,7 +52,7 @@ def main():
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame)
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame, find_object)
 
     # -------------------------------------------------------------------------
     # The event loop:
@@ -69,7 +70,7 @@ def get_shared_frames(main_frame, mqtt_sender):
     camera_frame = shared_gui.get_camera_frame(main_frame, mqtt_sender)
     return teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame
 
-def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame):
+def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame, find_object):
     teleop_frame.grid(row=0, column=0)
     arm_frame.grid(row=1, column=0)
     control_frame.grid(row=2, column=0)
@@ -77,12 +78,13 @@ def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame
     color_frame.grid(row=4, column=0)
     proximity_frame.grid(row=5, column=0)
     camera_frame.grid(row=0, column=1)
+    find_object.grid(row=1, column=1)
 
 def get_my_frames(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
 
-    frame_label = ttk.Label(frame, text="Find Object")
+    frame_label = ttk.Label(frame, text="Find Object and Make Tones")
     freq_lable = ttk.Label(frame, text='Starting Frequency')
     rate_lable = ttk.Label(frame, text='Rate of Increase')
 
@@ -99,6 +101,8 @@ def get_my_frames(window, mqtt_sender):
     start_button.grid(row=3, column=0)
 
     start_button['command'] = lambda : handle_find_object_ir(freq_entry, rate_entry, mqtt_sender)
+
+    return frame
 
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())

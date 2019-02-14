@@ -123,9 +123,9 @@ def get_proximity_frame(window, mqtt_sender):
     speed_entry.grid(row=4, column=1)
 
 
-    forward_button["command"] = lambda: handle_go_forward_until_distance_is_less_than(forward_entry.get(), speed_entry.get(), mqtt_sender)
-    backward_button["command"] = lambda : handle_go_backward_until_distance_is_greater_than(backward_entry.get(), speed_entry.get(), mqtt_sender)
-    delta_button["command"] = lambda : handle_go_until_distance_is_within(delta_entry.get(), delta_distance_entry.get(), speed_entry.get(), mqtt_sender)
+    forward_button["command"] = lambda: handle_go_forward_until_distance_is_less_than(forward_entry, speed_entry, mqtt_sender)
+    backward_button["command"] = lambda : handle_go_backward_until_distance_is_greater_than(backward_entry, speed_entry, mqtt_sender)
+    delta_button["command"] = lambda : handle_go_until_distance_is_within(delta_entry, delta_distance_entry, speed_entry, mqtt_sender)
 
     return frame
 

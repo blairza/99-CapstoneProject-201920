@@ -20,8 +20,14 @@ def find_object_ir(robot, starting_frequency, rate_of_increase):
         robot.SoundSystem.ToneMaker(frequency, 500)
 
         if ave <=3:
-            robot.stop
+            robot.stop()
             robot.ArmAndClaw.raise_arm()
             break
 
+
+def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
+    if clockwise ==True:
+       robot.s
+    if clockwise == False:
+        robot.go(-50, 50)
 
