@@ -7,6 +7,7 @@
   Winter term, 2018-2019.
 """
 import m1_extra
+import m2_extra
 
 class Receiver(object):
     def __init__(self, robot):
@@ -130,3 +131,4 @@ class Receiver(object):
     def m1_spin(self,speed,direction):
         print("Got spin")
         m1_extra.spin(self,direction,speed)
+
