@@ -527,13 +527,16 @@ def handle_go_until_distance_is_within(delta_entry, distance_entry,  speed_entry
 
 
 def handle_camera_display(mqtt_sender):
+    print("handle camera display")
     mqtt_sender.send_message('display_camera', [])
 
 
 def handle_counterclockwise_camera(area_entry, mqtt_sender):
+    print("handle counterclockwise camera")
     mqtt_sender.send_message('counterclockwise_camera', [area_entry.get()])
 
 
 def handle_clockwise_camera(area_entry, mqtt_sender):
+    print("handle clockwise camera")
     mqtt_sender.send_message('clockwise_camera', [area_entry.get()])
 

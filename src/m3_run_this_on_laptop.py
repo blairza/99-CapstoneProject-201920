@@ -46,12 +46,12 @@ def main():
     color_frame = shared_gui.get_color_frame(main_frame, mqtt_sender)
     camera_frame = shared_gui.get_camera_frame(main_frame, mqtt_sender)
     IR_frame = shared_gui.get_proximity_frame(main_frame, mqtt_sender)
-    my_frame = m3_get_my_frame(main_frame, mqtt_sender)
+
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
-    # TODO: Implement and call get_my_frames(...)
-
+    # Done: Implement and call get_my_frames(...)
+    my_frame = m3_get_my_frame(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Grid the frames.
@@ -80,6 +80,7 @@ def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame):
     control_frame.grid(row=2, column=0)
     sound_frame.grid(row=3, column=0)
 
+
 def m3_get_my_frame(window, mqtt_sender):
     """
         Constructs and returns a frame on the given window, where the frame has
@@ -98,23 +99,25 @@ def m3_get_my_frame(window, mqtt_sender):
     led_rateofchange = ttk.Entry(frame)
     rateofchange_label = ttk.Label(frame, text="Ratio of how fast you want the LEDs to flash on/off")
 
+
+
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
     IR_pickup_button.grid(row=1, column=1)
-    IR_ledflash_button.grid(row=3, column=0)
+    #IR_ledflash_button.grid(row=3, column=0)
     led_rateofchange.grid(row=2, column=0)
     rateofchange_label.grid(row=2, column=1)
 
     # Set the Button callbacks:
-    IR_pickup_button["command"] = lambda: handle_IR_pickup(mqtt_sender)
-    IR_ledflash_button["command"] = lambda: handle_ir_ledflash(led_rateofchange.get(), mqtt_sender)
+    IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), mqtt_sender)
+    #IR_ledflash_button["command"] = lambda: handle_ir_ledflash(led_rateofchange.get(), mqtt_sender)
 
     return frame
 
 
-def handle_IR_pickup(mqtt_sender):
+def handle_IR_pickup(rateofchange, mqtt_sender):
     print("Handle IR Pickup")
-    mqtt_sender.send_message('m3_proximity_sensor_pickup', [])
+    mqtt_sender.send_message('m3_proximity_sensor_pickup', [rateofchange])
 
 
 def handle_ir_ledflash(rateofchange, mqtt_sender):
