@@ -108,3 +108,18 @@ class Receiver(object):
     def go_until_distance_is_within(self, delta, inches, speed):
         print('Got Delta, Inches, and Speed for Go until distance is within', delta, inches, speed)
         self.robot.drive_system.go_until_distance_is_within(delta, inches, speed)
+
+    def display_camera(self):
+        print("Got Display Camera")
+        self.robot.drive_system.display_camera_data()
+
+    def counterclockwise_camera(self, area):
+        print("Got spin counterclockwise")
+        self.robot.drive_system.spin_counterclockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(),
+                                                                        area)
+
+    def clockwise_camera(self, area):
+        print("Got spin counterclockwise")
+        self.robot.drive_system.spin_clockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(), area)
+
+

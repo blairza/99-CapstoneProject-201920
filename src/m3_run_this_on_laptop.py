@@ -48,11 +48,12 @@ def main():
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
+    color_frame = shared_gui.get_color_frame(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-
+    color_frame.grid(row=0, column=1)
 
     # -------------------------------------------------------------------------
     # The event loop:

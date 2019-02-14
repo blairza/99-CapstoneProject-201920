@@ -431,9 +431,13 @@ class LEDSystem(object):
 
     def turn_both_leds_off(self):
         """ Turns the left and right LEDs off. """
-
+        self.left_led.turn_off()
+        self.right_led.turn_off()
+        
     def only_left_on(self):
         """ Turns the left LED on and the right LED off """
+        self.left_led.turn_on()
+        self.right_led.turn_off()
 
 ###############################################################################
 #    BeaconSystem
@@ -480,9 +484,11 @@ class Motor(object):
             self._motor = ev3.LargeMotor('out' + port)
         elif motor_type == 'medium':
             self._motor = ev3.MediumMotor('out' + port)
+        self.speed = 0
 
     def turn_on(self, speed):  # speed must be -100 to 100
         self._motor.run_direct(duty_cycle_sp=speed)
+        self.speed = speed
 
     def turn_off(self):
         self._motor.stop(stop_action="brake")
@@ -493,6 +499,12 @@ class Motor(object):
     def reset_position(self):
         self._motor.position = 0
 
+    def get_speed(self):
+        """
+        Takes the motor and returns the last speed it was set to
+        :return: int
+        """
+        return self.speed
 
 class TouchSensor(object):
     def __init__(self, port):  # port must be 1, 2, 3 or 4

@@ -283,6 +283,43 @@ def get_color_frame(window,mqtt_sender):
 
     return frame
 
+
+def get_camera_frame(window, mqtt_sender):
+    """
+    Constructs and returns a frame on the given window, where the frame has
+    Button objects to run the robot's camera programs (via MQTT).
+      :type  window:       ttk.Frame | ttk.Toplevel
+      :type  mqtt_sender:  com.MqttClient
+    """
+    # Construct the frame to return:
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    # Construct the widgets on the frame:
+    frame_label = ttk.Label(frame, text="Camera")
+    display_camera_button = ttk.Button(frame, text="Show the Camera's values for the blob in the console")
+    rotate_clockwise_button = ttk.Button(frame, text="Rotate Clockwise and stop when it sees an object")
+    rotate_countclockwise_button = ttk.Button(frame, text="Rotate Counter Clockwise and stop when it sees an object")
+    area_entry = ttk.Entry(frame)
+    area_label = ttk.Label(frame, text="The area of the object in order for the robot to stop spinning")
+
+    # Grid the widgets:
+    frame_label.grid(row=0, column=1)
+    display_camera_button.grid(row=1, column=1)
+    rotate_clockwise_button.grid(row=3, column=0)
+    rotate_countclockwise_button.grid(row=3, column=2)
+    area_entry.grid(row=2, column=0)
+    area_label.grid(row=2, column=1)
+
+    # Set the Button callbacks:
+    display_camera_button["command"] = lambda: handle_camera_display(mqtt_sender)
+    rotate_countclockwise_button["command"] = lambda: handle_counterclockwise_camera(area_entry, mqtt_sender)
+    rotate_clockwise_button["command"] = lambda: handle_clockwise_camera(area_entry, mqtt_sender)
+
+    return frame
+
+
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -447,30 +484,54 @@ def handle_tone(freq_entry, length_entry, mqtt_sender):
 def handle_speak(speak_entry, mqtt_sender):
     mqtt_sender.send_message("speak", [speak_entry.get()])
 
+
 ########
 # Handlers for Color Frame
 ########
 def handle_is_color(speed_entry,color_entry,mqtt_sender):
     mqtt_sender.send_message("is_color",[speed_entry.get(),color_entry.get()])
 
+
 def handle_is_not_color(speed_entry,color_entry,mqtt_sender):
     mqtt_sender.send_message("is_not_color",[speed_entry.get(),color_entry.get()])
+
 
 def handle_greater_than(speed_entry,intensity_entry,mqtt_sender):
     mqtt_sender.send_message("greater",[speed_entry.get(),intensity_entry.get()])
 
-def handle_less_than(speed_entry,intensity_entry,mqtt_sender):
-    mqtt_sender.send_message("less",[speed_entry.get(),intensity_entry.get()])
+
+def handle_less_than(speed_entry,intensity_entry, mqtt_sender):
+    mqtt_sender.send_message("less",[speed_entry.get(), intensity_entry.get()])
 
 ###################3
 #Handlers for Proximity Sensor Frame
 ####################
 
+
 def handle_go_forward_until_distance_is_less_than(distance_entry, speed_entry, mqtt_sender):
-    mqtt_sender.send_message('go_forward_until_distance_is_less_than', [distance_entry, speed_entry])
+    mqtt_sender.send_message('go_forward_until_distance_is_less_than', [distance_entry.get(), speed_entry.get()])
+
 
 def handle_go_backward_until_distance_is_greater_than(distance_entry, speed_entry, mqtt_sender):
-    mqtt_sender.send_message('go_backward_until_distance_is_greater_than', [distance_entry, speed_entry, mqtt_sender])
+    mqtt_sender.send_message('go_backward_until_distance_is_greater_than', [distance_entry.get(), speed_entry.get()])
+
 
 def handle_go_until_distance_is_within(delta_entry, distance_entry,  speed_entry, mqtt_sender):
-    mqtt_sender.send_message('go_until_distance_is_within', [delta_entry, distance_entry, speed_entry])
+    mqtt_sender.send_message('go_until_distance_is_within', [delta_entry.get(), distance_entry.get(), speed_entry.get()])
+
+########
+# Handles for camera functions
+########
+
+
+def handle_camera_display(mqtt_sender):
+    mqtt_sender.send_message('display_camera', [])
+
+
+def handle_counterclockwise_camera(area_entry, mqtt_sender):
+    mqtt_sender.send_message('counterclockwise_camera', [area_entry.get()])
+
+
+def handle_clockwise_camera(area_entry, mqtt_sender):
+    mqtt_sender.send_message('clockwise_camera', [area_entry.get()])
+
