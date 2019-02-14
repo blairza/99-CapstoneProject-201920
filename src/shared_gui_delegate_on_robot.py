@@ -86,19 +86,19 @@ class Receiver(object):
 
     def is_color(self,speed,color):
         print('Got color', color)
-        self.robot.drive_system.go_straight_until_color_is(color,speed)
+        self.robot.drive_system.go_straight_until_color_is(int(color),int(speed))
 
     def is_not_color(self,speed,color):
         print('Got color', color)
-        self.robot.drive_system.go_straight_until_color_is_not(color,speed)
+        self.robot.drive_system.go_straight_until_color_is_not(int(color),int(speed))
 
     def greater(self,speed,intensity):
         print('Got intensity', intensity)
-        self.robot.drive_system.go_straight_until_intensity_is_greater_than(intensity,speed)
+        self.robot.drive_system.go_straight_until_intensity_is_greater_than(int(intensity),int(speed))
 
     def less(self,speed,intensity):
         print('Got intensity', intensity)
-        self.robot.drive_system.go_straight_until_intensity_is_less_than(intensity,speed)
+        self.robot.drive_system.go_straight_until_intensity_is_less_than(int(intensity),int(speed))
 
     def go_forward_until_distance_is_less_than(self, inches, speed):
         print('Got Inches and Speed for Go forward until distance is less than', inches, speed)
@@ -128,7 +128,7 @@ class Receiver(object):
 
     def m1_beep_move(self,beep_frequency,beep_drop):
         print("Got beep and move")
-        m1_extra.beep_move(self,beep_frequency,beep_drop)
+        m1_extra.beep_move(self,int(beep_frequency),int(beep_drop))
 
     def m1_spin(self,speed,direction):
         print("Got spin")
