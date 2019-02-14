@@ -57,6 +57,12 @@ def main():
     beep_drop = ttk.Entry(frame_me,width=5)
     beep_drop_label = ttk.Label(frame_me,text="Increasing frequency number")
     beep_move_button = ttk.Button(frame_me,text="Make robot beep and move")
+    speed_entry = ttk.Entry(frame_me,width=5)
+    speed_label = ttk.Label(frame_me,text = "Speed from 0 to 100")
+    direction = ttk.Entry(frame_me,width=5)
+    direction_label = ttk.Label(frame_me,text = "Enter 1 for clockwise and -1  for counter clockwise")
+    spin_button = ttk.Button(frame_me,text = "Make robot spin to look at objects")
+
 
     frame_label.grid(row=0,column=1)
     beep_drop.grid(row=2,column=0)
@@ -64,6 +70,14 @@ def main():
     beep_frequency.grid(row=2,column=2)
     beep_freq_label.grid(row=1,column=2)
     beep_move_button.grid(row=3,column=1)
+    speed_label.grid(row=1,column=5)
+    speed_entry.grid(row=2,column=5)
+    spin_button.grid(row=2,column=6)
+    direction.grid(row=2,column=7)
+    direction_label.grid(row=1,column=7)
+
+    beep_move_button["command"] = lambda: handle_beep_move(beep_frequency,beep_drop,sender)
+    spin_button["command"] = lambda: handle_spin(speed_entry,direction,sender)
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
@@ -92,7 +106,13 @@ def grid_frames(teleop_frame, arm_frame, control_frame,sound_frame,color_frame):
     sound_frame.grid(row=1,column=1)
     color_frame.grid(row=0,column=2)
 
+def handle_beep_move(beep_frequency,beep_drop,mqtt_sender):
+    print("Got beep frequency", beep_frequency)
+    mqtt_sender.send_message("m1_beep_move", [beep_frequency,beep_drop])
 
+def handle_spin(speed,direction,mqtt_sender):
+    print("Got direction", direction)
+    mqtt_sender.send_message("m1_spin",[speed,direction])
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

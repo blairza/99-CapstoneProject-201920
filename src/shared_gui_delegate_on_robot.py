@@ -6,6 +6,7 @@
     and Zane Blair, Ben Hawkins, and Trey Kline.
   Winter term, 2018-2019.
 """
+import m1_extra
 
 class Receiver(object):
     def __init__(self, robot):
@@ -122,4 +123,10 @@ class Receiver(object):
         print("Got spin counterclockwise")
         self.robot.drive_system.spin_clockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(), area)
 
+    def m1_beep_move(self,beep_frequency,beep_drop):
+        print("Got beep and move")
+        m1_extra.beep_move(self,beep_frequency,beep_drop)
 
+    def m1_spin(self,speed,direction):
+        print("Got spin")
+        m1_extra.spin(self,direction,speed)
