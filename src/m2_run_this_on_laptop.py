@@ -91,7 +91,9 @@ def get_my_frames(window, mqtt_sender):
     freq_entry = ttk.Entry(frame, width='8')
     rate_entry = ttk.Entry(frame, width='8')
 
-    start_button=ttk.Button(frame, text='Start')
+    start_button=ttk.Button(frame, text='Find Using IR')
+    clockwise_button=ttk.Button(frame, text='Spin clockwise and Find')
+    counterclockwise_button = ttk.Button(frame, text='Spin counterclockwise and Find')
 
     frame_label.grid(row=0, column=0)
     freq_lable.grid(row=1, column=0)
@@ -99,14 +101,21 @@ def get_my_frames(window, mqtt_sender):
     rate_lable.grid(row=2, column=0)
     rate_entry.grid(row=2, column=1)
     start_button.grid(row=3, column=0)
+    clockwise_button.grid(row=3, column=1)
+    counterclockwise_button(row=3, column=2)
 
-    start_button['command'] = lambda : handle_find_object_ir(freq_entry, rate_entry, mqtt_sender)
+    start_button['command'] = lambda : handle_find_object_ir(freq_entry, rate_entry, True, mqtt_sender)
+    clockwise_button['command'] = lambda : handle_find_object_ir(freq_entry, rate_entry, True, mqtt_sender)
 
     return frame
 
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())
     mqtt_sender.send_message('find_object_ir', [freq.get(), rate.get()])
+
+def handle_find_object_camera(freq, rate, clockwise, mqtt_sender):
+    print('Spinning and the finding object', freq.get(), rate.get(), clockwise)
+    mqtt_sender.send_message('find_object_camera', [freq.get(), rate.get(), clockwise])
 
 
 

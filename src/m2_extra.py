@@ -26,8 +26,24 @@ def find_object_ir(robot, starting_frequency, rate_of_increase):
 
 
 def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
-    if clockwise ==True:
-       robot.s
+    if clockwise == True:
+       robot.sensor_system.Camera.spin_clockwise_until_sees_object()
     if clockwise == False:
-        robot.go(-50, 50)
+        robot.sensor_system.Camera.spin_counterclockwise_until_sees_object()
+
+    frequency = starting_frequency
+    while True:
+        ave = 0
+        for k in range(8):
+            ave = ave + robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        ave = ave / 8
+
+        frequency = frequency + (rate_of_increase/ave)
+        robot.SoundSystem.ToneMaker(frequency, 500)
+
+        if ave <=3:
+            robot.stop()
+            robot.ArmAndClaw.raise_arm()
+            break
+
 
