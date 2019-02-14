@@ -8,6 +8,7 @@
 """
 import m1_extra
 import m2_extra
+import m3_extra
 
 class Receiver(object):
     def __init__(self, robot):
@@ -101,15 +102,15 @@ class Receiver(object):
 
     def go_forward_until_distance_is_less_than(self, inches, speed):
         print('Got Inches and Speed for Go forward until distance is less than', inches, speed)
-        self.robot.drive_system.go_forward_until_distance_is_less_than(inches, speed)
+        self.robot.drive_system.go_forward_until_distance_is_less_than(int(inches), int(speed))
 
     def go_backward_until_distance_is_greater_than(self, inches, speed):
         print('Got Inches and Speed for Go backward until distance is greater than', inches, speed)
-        self.robot.drive_system.go_backward_until_distance_is_greater_than(inches, speed)
+        self.robot.drive_system.go_backward_until_distance_is_greater_than(int(inches), int(speed))
 
     def go_until_distance_is_within(self, delta, inches, speed):
         print('Got Delta, Inches, and Speed for Go until distance is within', delta, inches, speed)
-        self.robot.drive_system.go_until_distance_is_within(delta, inches, speed)
+        self.robot.drive_system.go_until_distance_is_within(int(delta), int(inches), int(speed))
 
     def display_camera(self):
         print("Got Display Camera")
@@ -118,11 +119,12 @@ class Receiver(object):
     def counterclockwise_camera(self, area):
         print("Got spin counterclockwise")
         self.robot.drive_system.spin_counterclockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(),
-                                                                        area)
+                                                                        int(area))
 
     def clockwise_camera(self, area):
         print("Got spin counterclockwise")
-        self.robot.drive_system.spin_clockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(), area)
+        self.robot.drive_system.spin_clockwise_until_sees_object(self.robot.drive_system.left_motor.get_speed(),
+                                                                 int(area))
 
     def m1_beep_move(self,beep_frequency,beep_drop):
         print("Got beep and move")
@@ -130,8 +132,16 @@ class Receiver(object):
 
     def m1_spin(self,speed,direction):
         print("Got spin")
-        m1_extra.spin(self,direction,speed)
+        m1_extra.spin(self, int(direction), int(speed))
 
     def m2_find_object_ir(self, freq, rate):
         print('Got find object ir')
-        m2_extra.find_object_ir(self.robot, freq, rate)
+        m2_extra.find_object_ir(self.robot, int(freq), int(rate))
+
+    def m3_proximity_sensor_pickup(self):
+        print('Got m3 Proximity sensor pickup')
+        m3_extra.m3_proximity_sensor_led_shift(self)
+
+    def m3_ir_ledflash(self, rateofchange):
+        print("Got IR LED Flash, rate of change:", rateofchange)
+        m3_extra.m3_proximity_sensor_led_shift(self, int(rateofchange))

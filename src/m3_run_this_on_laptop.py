@@ -43,18 +43,21 @@ def main():
     # -------------------------------------------------------------------------
     teleop_frame, arm_frame, control_frame, sound_frame = get_shared_frames(main_frame, mqtt_sender)
     grid_frames(teleop_frame, arm_frame, control_frame, sound_frame)
-
+    color_frame = shared_gui.get_color_frame(main_frame, mqtt_sender)
+    camera_frame = shared_gui.get_camera_frame(main_frame, mqtt_sender)
+    IR_frame = shared_gui.get_proximity_frame(main_frame, mqtt_sender)
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
-    color_frame = shared_gui.get_color_frame(main_frame, mqtt_sender)
+
 
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
     color_frame.grid(row=0, column=1)
-
+    camera_frame.grid(row=1, column=1)
+    IR_frame.grid(row=2, column=1)
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
