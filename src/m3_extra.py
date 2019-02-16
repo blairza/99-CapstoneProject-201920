@@ -16,13 +16,13 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change, speed):
     rosebot.drive_system.go(speed, speed)
     while True:
         rosebot.led_system.only_left_on()
-        time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
+        time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.right_led.turn_on()
-        time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
+        time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.left_led.turn_off()
-        time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
+        time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.turn_both_leds_off()
-        time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
+        time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         if rosebot.sensor_system.ir_proximity_sensor.get_distance() > 1.2:
             break
     rosebot.drive_system.stop()
@@ -47,7 +47,7 @@ def m3_proximity_sensor_led_shift(rosebot, rate_of_change):
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
 
 
-def m3_camera_pickup(rosebot, spin_dir, rateofchange):
+def m3_camera_pickup(rosebot, rateofchange, speed, spin_dir):
     """
     Spins counter clockwise if spin direction is 1, spins clockwise if 0
 
@@ -57,9 +57,9 @@ def m3_camera_pickup(rosebot, spin_dir, rateofchange):
     :return:
     """
     if spin_dir == 0:
-        rosebot.drive_system.spin_clockwise_until_sees_object(rosebot.drive_system.left_motor.speed, 400)
-        m3_proximity_sensor_pick_up(rosebot, rateofchange)
+        rosebot.drive_system.spin_clockwise_until_sees_object(speed, 400)
+        m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
 
     if spin_dir == 1:
-        rosebot.drive_system.spin_counterclockwise_until_sees_object(rosebot.drive_system.left_motor.speed, 400)
-        m3_proximity_sensor_pick_up(rosebot, rateofchange)
+        rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 400)
+        m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)

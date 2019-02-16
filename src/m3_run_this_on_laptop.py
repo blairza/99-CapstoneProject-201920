@@ -107,8 +107,8 @@ def m3_get_my_frame(window, mqtt_sender):
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
     IR_pickup_button.grid(row=1, column=1)
-    sprint2_speed_entry.grid(row=3, column=0)
-    sprint2_speed_label.grid(row=3, column=1)
+    sprint2_speed_entry.grid(row=4, column=0)
+    sprint2_speed_label.grid(row=4, column=1)
     led_rateofchange.grid(row=2, column=0)
     rateofchange_label.grid(row=2, column=1)
     camera_find_clockbutton.grid(row=3, column=0)
