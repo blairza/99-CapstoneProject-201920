@@ -146,6 +146,6 @@ class Receiver(object):
     #    print("Got IR LED Flash, rate of change:", rateofchange)
     #   m3_extra.m3_proximity_sensor_led_shift(self, int(rateofchange))
 
-    def m2_find_object_camera(self, freq, rate):
+    def m2_find_object_camera(self, freq, rate, clockwise):
         print('Got find object using camera')
-        m2_extra.find_object_camera(freq, rate)
+        m2_extra.find_object_camera(freq, rate, clockwise)
