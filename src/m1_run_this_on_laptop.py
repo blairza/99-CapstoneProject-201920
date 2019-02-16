@@ -106,8 +106,8 @@ def grid_frames(teleop_frame, arm_frame, control_frame,sound_frame,color_frame,c
     arm_frame.grid(row=0, column=1)
     control_frame.grid(row=1, column=0)
     sound_frame.grid(row=1,column=1)
-    color_frame.grid(row=0,column=2)
-    camera_frame.grid(row=1,column=2)
+    color_frame.grid(row=4,column=0)
+    camera_frame.grid(row=4,column=1)
     proximity_frame.grid(row=3,column=0)
 
 def handle_beep_move(beep_frequency,beep_drop,mqtt_sender):
