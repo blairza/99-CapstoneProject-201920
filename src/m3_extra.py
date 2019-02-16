@@ -16,12 +16,20 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change, speed):
     rosebot.drive_system.go(speed, speed)
     while True:
         rosebot.led_system.only_left_on()
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < 1.75:
+            break
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.right_led.turn_on()
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < 1.75:
+            break
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.left_led.turn_off()
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < 1.75:
+            break
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.turn_both_leds_off()
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < 1.75:
+            break
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         if rosebot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < 1.75:
             break
