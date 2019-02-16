@@ -140,6 +140,14 @@ class Receiver(object):
         print("Got spin")
         m1_extra.spin(self.robot, int(direction), int(speed))
 
+    def m1_move_to(self,speed,direction):
+        print("Got move to")
+        m1_extra.move_to(self.robot, int(direction), int(speed))
+
+    def m1_pick_up(self,speed,direction):
+        print("Got pick up")
+        m1_extra.pick_up(self.robot, int(direction), int(speed))
+
     def m2_find_object_ir(self, freq, rate):
         print('Got find object ir')
         m2_extra.find_object_ir(self.robot, int(freq), int(rate))

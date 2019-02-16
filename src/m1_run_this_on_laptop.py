@@ -62,6 +62,8 @@ def main():
     direction = ttk.Entry(frame_me,width=5)
     direction_label = ttk.Label(frame_me,text = "Enter 1 for clockwise and -1  for counter clockwise")
     spin_button = ttk.Button(frame_me,text = "Make robot spin to look at objects")
+    move_to_button = ttk.Button(frame_me,text = "Move robot to object")
+    pick_up_button = ttk.Button(frame_me,text = "Pick up an object")
 
 
     frame_label.grid(row=0,column=1)
@@ -70,14 +72,18 @@ def main():
     beep_frequency.grid(row=2,column=0)
     beep_freq_label.grid(row=1,column=0)
     beep_move_button.grid(row=3,column=1)
-    speed_label.grid(row=1,column=5)
-    speed_entry.grid(row=2,column=5)
-    spin_button.grid(row=2,column=6)
-    direction.grid(row=2,column=7)
-    direction_label.grid(row=1,column=7)
+    speed_label.grid(row=1,column=3)
+    speed_entry.grid(row=2,column=3)
+    spin_button.grid(row=2,column=4)
+    direction.grid(row=2,column=5)
+    direction_label.grid(row=1,column=5)
+    move_to_button.grid(row=3,column=4)
+    pick_up_button.grid(row=4,column=4)
 
     beep_move_button["command"] = lambda: handle_beep_move(beep_frequency,beep_drop,sender)
     spin_button["command"] = lambda: handle_spin(speed_entry,direction,sender)
+    move_to_button["command"] = lambda: handle_move_to(speed_entry,direction,sender)
+    pick_up_button["command"] = lambda: handle_pick_up(speed_entry,direction,sender)
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
@@ -117,6 +123,14 @@ def handle_beep_move(beep_frequency,beep_drop,mqtt_sender):
 def handle_spin(speed,direction,mqtt_sender):
     print("Got direction", direction)
     mqtt_sender.send_message("m1_spin",[speed.get(),direction.get()])
+
+def handle_move_to(speed,direction,mqtt_sender):
+    print("Got move to")
+    mqtt_sender.send_message("m1_move_to",[speed.get(),direction.get()])
+
+def handle_pick_up(speed,direction,mqtt_sender):
+    print("Got pick up")
+    mqtt_sender.send_message((speed.get(),direction.get()))
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

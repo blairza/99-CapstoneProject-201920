@@ -22,3 +22,11 @@ def spin(robot,direction,speed):
         robot.drive_system.spin_clockwise_until_sees_object(speed,robot.sensor_system.camera.get_biggest_blob().get_area()-2)
     if (direction == -1):
         robot.drive_system.spin_counterclockwise_until_sees_object(speed,robot.sensor_system.camera.get_biggest_blob().get_area() - 2)
+
+def move_to(robot,direction,speed):
+    spin(robot,direction,speed)
+    robot.drive_system.go_forward_until_distance_is_less_than(2,speed)
+
+def pick_up(robot,direction,speed):
+    move_to(robot,direction,speed)
+    robot.arm_and_claw.raise_arm()
