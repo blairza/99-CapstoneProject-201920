@@ -57,9 +57,9 @@ def m3_camera_pickup(rosebot, rateofchange, speed, spin_dir):
     :return:
     """
     if spin_dir == 0:
-        rosebot.drive_system.spin_clockwise_until_sees_object(speed, 200)
+        rosebot.drive_system.spin_clockwise_until_sees_object(speed, 50)
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
 
     if spin_dir == 1:
-        rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
+        rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 50)
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
