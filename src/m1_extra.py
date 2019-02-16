@@ -1,16 +1,20 @@
 """Zane Blair's Extra File"""
 import time
+import rosebot as rb
 
 def beep_move(robot,frequency,drop):
+    """:type robot : rb.RoseBot"""
     k = 0
-    robot.go(100,100)
+    robot.drive_system.go(100,100)
+    distance = robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
     while True:
         if(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2):
-          robot.stop()
+          robot.drive_system.stop()
           break
-        robot.beep()
-        time.sleep(frequency- drop*(k))
-        k += 1
+        if(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < distance):
+            robot.sound_system.beeper.beep()
+            time.sleep(frequency- drop*(k))
+            k += 1
 
 def spin(robot,direction,speed):
     """Figure out what the function is to find the object in the camera"""

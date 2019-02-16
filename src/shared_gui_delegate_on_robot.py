@@ -9,6 +9,7 @@
 import m1_extra
 import m2_extra
 import m3_extra
+import time
 
 class Receiver(object):
     def __init__(self, robot):
@@ -127,7 +128,12 @@ class Receiver(object):
                                                                  int(area))
 
     def m1_beep_move(self,beep_frequency,beep_drop):
-        print("Got beep and move")
+        print("CSSE120 is fun")
+        print(beep_frequency)
+        print(beep_drop)
+        time.sleep(1)
+        print(self.robot)
+        time.sleep(2)
         m1_extra.beep_move(self.robot,float(beep_frequency),float(beep_drop))
 
     def m1_spin(self,speed,direction):
