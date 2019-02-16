@@ -65,10 +65,10 @@ def main():
 
 
     frame_label.grid(row=0,column=1)
-    beep_drop.grid(row=2,column=0)
-    beep_drop_label.grid(row=1,column=0)
-    beep_frequency.grid(row=2,column=2)
-    beep_freq_label.grid(row=1,column=2)
+    beep_drop.grid(row=2,column=2)
+    beep_drop_label.grid(row=1,column=2)
+    beep_frequency.grid(row=2,column=0)
+    beep_freq_label.grid(row=1,column=0)
     beep_move_button.grid(row=3,column=1)
     speed_label.grid(row=1,column=5)
     speed_entry.grid(row=2,column=5)
@@ -112,11 +112,11 @@ def grid_frames(teleop_frame, arm_frame, control_frame,sound_frame,color_frame,c
 
 def handle_beep_move(beep_frequency,beep_drop,mqtt_sender):
     print("Got beep frequency", beep_frequency)
-    mqtt_sender.send_message("m1_beep_move", [beep_frequency,beep_drop])
+    mqtt_sender.send_message("m1_beep_move", [beep_frequency.get(),beep_drop.get()])
 
 def handle_spin(speed,direction,mqtt_sender):
     print("Got direction", direction)
-    mqtt_sender.send_message("m1_spin",[speed,direction])
+    mqtt_sender.send_message("m1_spin",[speed.get(),direction.get()])
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

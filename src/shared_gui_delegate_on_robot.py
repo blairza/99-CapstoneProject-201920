@@ -128,7 +128,7 @@ class Receiver(object):
 
     def m1_beep_move(self,beep_frequency,beep_drop):
         print("Got beep and move")
-        m1_extra.beep_move(self,int(beep_frequency),int(beep_drop))
+        m1_extra.beep_move(self,float(beep_frequency),float(beep_drop))
 
     def m1_spin(self,speed,direction):
         print("Got spin")
