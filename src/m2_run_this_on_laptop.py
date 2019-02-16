@@ -112,11 +112,11 @@ def get_my_frames(window, mqtt_sender):
 
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())
-    mqtt_sender.send_message('find_object_ir', [freq.get(), rate.get()])
+    mqtt_sender.send_message('m2_find_object_ir', [freq.get(), rate.get()])
 
 def handle_find_object_camera(freq, rate, clockwise, mqtt_sender):
     print('Spinning and the finding object', freq.get(), rate.get(), clockwise)
-    mqtt_sender.send_message('find_object_camera', [freq.get(), rate.get(), clockwise])
+    mqtt_sender.send_message('m2_find_object_camera', [freq.get(), rate.get(), clockwise])
 
 
 
