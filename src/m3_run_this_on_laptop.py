@@ -120,9 +120,9 @@ def handle_IR_pickup(rateofchange, mqtt_sender):
     mqtt_sender.send_message('m3_proximity_sensor_pickup', [rateofchange])
 
 
-def handle_ir_ledflash(rateofchange, mqtt_sender):
-    print("Handle IR LED Flash")
-    mqtt_sender.send_message('m3_ir_ledflash', [rateofchange])
+#def handle_ir_ledflash(rateofchange, mqtt_sender):
+#    print("Handle IR LED Flash")
+#    mqtt_sender.send_message('m3_ir_ledflash', [rateofchange])
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
