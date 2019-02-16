@@ -140,7 +140,7 @@ class Receiver(object):
 
     def m3_proximity_sensor_pickup(self, rateofchange):
         print('Got m3 Proximity sensor pickup')
-        m3_extra.m3_proximity_sensor_led_shift(self, int(rateofchange))
+        m3_extra.m3_proximity_sensor_pick_up(self, int(rateofchange))
 
     #def m3_ir_ledflash(self, rateofchange):
     #    print("Got IR LED Flash, rate of change:", rateofchange)

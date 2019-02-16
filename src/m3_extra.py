@@ -13,8 +13,8 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change):
     :type rate_of_change: int
     :return:
     """
-    rosebot.drive_system.go_forward_until_distance_is_less_than(3, rosebot.drive_system.left_motor.get_speed())
-    while rosebot.sensor_system.ir_proximity_sensor.get_distance() > 3:
+    rosebot.drive_system.go_forward_until_distance_is_less_than(1.2, rosebot.drive_system.left_motor.get_speed())
+    while rosebot.sensor_system.ir_proximity_sensor.get_distance() > 1.2:
         rosebot.led_system.only_left_on()
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
         rosebot.led_system.right_led.turn_on()
@@ -29,7 +29,7 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change):
 def m3_proximity_sensor_led_shift(rosebot, rate_of_change):
     """
 
-    :param rosebot: rb.RoseBot
+    :type rosebot: rb.RoseBot
     :param rate_of_change: int
     :return:
     """
@@ -44,3 +44,19 @@ def m3_proximity_sensor_led_shift(rosebot, rate_of_change):
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
 
 
+def m3_camera_pickup(rosebot, spin_dir, rateofchange):
+    """
+    Spins counter clockwise if spin direction is 1, spins clockwise if 0
+
+
+    :type rosebot: rb.RoseBot
+    :param spin_dir:
+    :return:
+    """
+    if spin_dir == 0:
+        rosebot.drive_system.spin_clockwise_until_sees_object(rosebot.drive_system.left_motor.speed, 400)
+        m3_proximity_sensor_pick_up(rosebot, rateofchange)
+
+    if spin_dir == 1:
+        rosebot.drive_system.spin_counterclockwise_until_sees_object(rosebot.drive_system.left_motor.speed, 400)
+        m3_proximity_sensor_pick_up(rosebot, rateofchange)
