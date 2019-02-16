@@ -70,4 +70,7 @@ def m3_camera_pickup(rosebot, rateofchange, speed, spin_dir):
 
     if spin_dir == 1:
         rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 50)
+        rosebot.drive_system.go(-10, 10)
+        time.sleep(1.3)
+        rosebot.drive_system.stop()
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
