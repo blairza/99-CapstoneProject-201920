@@ -100,6 +100,9 @@ def m3_get_my_frame(window, mqtt_sender):
     rateofchange_label = ttk.Label(frame, text="Ratio of how fast you want the LEDs to flash on/off")
     sprint2_speed_entry = ttk.Entry(frame)
     sprint2_speed_label = ttk.Label(frame, text="The speed at which it moves towards the object")
+    camera_find_clockbutton = ttk.Button(frame, text="Use the Camera to find and pickup an object by spinning clockwise")
+    camera_find_countbutton = ttk.Button(frame, text="Use the Camera to find and pickup an objecy by spinning "
+                                                     "counterclockwise")
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
@@ -108,17 +111,26 @@ def m3_get_my_frame(window, mqtt_sender):
     sprint2_speed_label(row=3, column=1)
     led_rateofchange.grid(row=2, column=0)
     rateofchange_label.grid(row=2, column=1)
+    camera_find_clockbutton.grid(row=3, column=0)
+    camera_find_countbutton.grid(row=3, column=1)
 
     # Set the Button callbacks:
     IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
-    #sprint2_speed_button["command"] = lambda: handle_ir_ledflash(led_rateofchange.get(), mqtt_sender)
-
+    camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+                                                                      0, mqtt_sender)
+    camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+                                                                      1, mqtt_sender)
     return frame
 
 
 def handle_IR_pickup(rateofchange, speed, mqtt_sender):
     print("Handle IR Pickup")
     mqtt_sender.send_message('m3_proximity_sensor_pickup', [rateofchange, speed])
+
+
+def handle_camera_pickup(rateofchange, speed, clockwiseorcounterclockwise, mqtt_sender):
+    print("Handle Camera find and pickup")
+    mqtt_sender.send_message('m3_camera_pickup', [rateofchange, speed, clockwiseorcounterclockwise])
 
 
 #def handle_ir_ledflash(rateofchange, mqtt_sender):
