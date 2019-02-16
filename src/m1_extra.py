@@ -15,18 +15,21 @@ def beep_move(robot,frequency,drop):
             robot.sound_system.beeper.beep()
             time.sleep(frequency- drop*(k))
             k += 1
+    robot.arm_and_claw.raise_arm()
 
 def spin(robot,direction,speed):
-    """Figure out what the function is to find the object in the camera"""
+    """:type robot : rb.RoseBot"""
     if(direction == 1):
-        robot.drive_system.spin_clockwise_until_sees_object(speed,robot.sensor_system.camera.get_biggest_blob().get_area()-2)
+        robot.drive_system.spin_clockwise_until_sees_object(speed,4000)
     if (direction == -1):
-        robot.drive_system.spin_counterclockwise_until_sees_object(speed,robot.sensor_system.camera.get_biggest_blob().get_area() - 2)
+        robot.drive_system.spin_counterclockwise_until_sees_object(speed,4000)
 
 def move_to(robot,direction,speed):
+    """:type robot : rb.RoseBot"""
     spin(robot,direction,speed)
     robot.drive_system.go_forward_until_distance_is_less_than(2,speed)
 
 def pick_up(robot,direction,speed):
+    """:type robot : rb.RoseBot"""
     move_to(robot,direction,speed)
     robot.arm_and_claw.raise_arm()
