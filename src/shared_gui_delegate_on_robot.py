@@ -138,9 +138,9 @@ class Receiver(object):
         print('Got find object ir')
         m2_extra.find_object_ir(self.robot, int(freq), int(rate))
 
-    def m3_proximity_sensor_pickup(self, rateofchange):
+    def m3_proximity_sensor_pickup(self, rateofchange, speed):
         print('Got m3 Proximity sensor pickup')
-        m3_extra.m3_proximity_sensor_pick_up(self, int(rateofchange))
+        m3_extra.m3_proximity_sensor_pick_up(self.robot, int(rateofchange), int(speed))
 
     #def m3_ir_ledflash(self, rateofchange):
     #    print("Got IR LED Flash, rate of change:", rateofchange)

@@ -98,26 +98,27 @@ def m3_get_my_frame(window, mqtt_sender):
     IR_ledflash_button = ttk.Button(frame, text="Turn the LEDS on the Lego Unit on/off based on proximity to an object")
     led_rateofchange = ttk.Entry(frame)
     rateofchange_label = ttk.Label(frame, text="Ratio of how fast you want the LEDs to flash on/off")
-
-
+    sprint2_speed_entry = ttk.Entry(frame)
+    sprint2_speed_label = ttk.Label(frame, text="The speed at which it moves towards the object")
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
     IR_pickup_button.grid(row=1, column=1)
-    #IR_ledflash_button.grid(row=3, column=0)
+    sprint2_speed_entry.grid(row=3, column=0)
+    sprint2_speed_label(row=3, column=1)
     led_rateofchange.grid(row=2, column=0)
     rateofchange_label.grid(row=2, column=1)
 
     # Set the Button callbacks:
-    IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), mqtt_sender)
-    #IR_ledflash_button["command"] = lambda: handle_ir_ledflash(led_rateofchange.get(), mqtt_sender)
+    IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
+    #sprint2_speed_button["command"] = lambda: handle_ir_ledflash(led_rateofchange.get(), mqtt_sender)
 
     return frame
 
 
-def handle_IR_pickup(rateofchange, mqtt_sender):
+def handle_IR_pickup(rateofchange, speed, mqtt_sender):
     print("Handle IR Pickup")
-    mqtt_sender.send_message('m3_proximity_sensor_pickup', [rateofchange])
+    mqtt_sender.send_message('m3_proximity_sensor_pickup', [rateofchange, speed])
 
 
 #def handle_ir_ledflash(rateofchange, mqtt_sender):

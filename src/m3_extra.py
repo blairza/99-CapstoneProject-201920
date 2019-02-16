@@ -7,14 +7,14 @@ import rosebot as rb
 import time
 
 
-def m3_proximity_sensor_pick_up(rosebot, rate_of_change):
+def m3_proximity_sensor_pick_up(rosebot, rate_of_change, speed):
     """
     :type rosebot: rb.RoseBot
     :type rate_of_change: int
     :return:
     """
-    rosebot.drive_system.go_forward_until_distance_is_less_than(1.2, rosebot.drive_system.left_motor.get_speed())
-    while rosebot.sensor_system.ir_proximity_sensor.get_distance() > 1.2:
+    rosebot.drive_system.go(speed, speed)
+    while True:
         rosebot.led_system.only_left_on()
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
         rosebot.led_system.right_led.turn_on()
@@ -23,6 +23,9 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change):
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
         rosebot.led_system.turn_both_leds_off()
         time.sleep(rate_of_change * (rosebot.sensor_system.InfraredProximitySensor.get_distance()) / 30)
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance() > 1.2:
+            break
+    rosebot.drive_system.stop()
     rosebot.arm_and_claw.raise_arm()
 
 
