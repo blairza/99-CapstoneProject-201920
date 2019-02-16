@@ -161,7 +161,7 @@ class Receiver(object):
     #   m3_extra.m3_proximity_sensor_led_shift(self, int(rateofchange))
 
     def m2_find_object_camera(self, freq, rate, clockwise):
-        print('Got find object using camera')
+        print('Got find object using camera', clockwise)
         m2_extra.find_object_camera(freq, rate, clockwise)
 
     def m3_camera_pickup(self, rateofchange, speed, clockwiseorcounterclockwise):

@@ -105,8 +105,8 @@ def get_my_frames(window, mqtt_sender):
     counterclockwise_button.grid(row=3, column=2)
 
     start_button['command'] = lambda : handle_find_object_ir(freq_entry, rate_entry, mqtt_sender)
-    clockwise_button['command'] = lambda : handle_find_object_camera(freq_entry, rate_entry, True, mqtt_sender)
-    counterclockwise_button['command'] = lambda: handle_find_object_camera(freq_entry, rate_entry, False, mqtt_sender)
+    clockwise_button['command'] = lambda : handle_find_object_camera(freq_entry, rate_entry, 1, mqtt_sender)
+    counterclockwise_button['command'] = lambda: handle_find_object_camera(freq_entry, rate_entry, 0, mqtt_sender)
 
     return frame
 
@@ -115,8 +115,8 @@ def handle_find_object_ir(freq, rate, mqtt_sender):
     mqtt_sender.send_message('m2_find_object_ir', [int(freq.get()), int(rate.get())])
 
 def handle_find_object_camera(freq, rate, clockwise, mqtt_sender):
-    print('Spinning and the finding object', freq.get(), rate.get(), clockwise)
-    mqtt_sender.send_message('m2_find_object_camera', [int(freq.get()), int(rate.get()), clockwise])
+    print('Spinning and the finding object', freq.get(), rate.get(), int(clockwise))
+    mqtt_sender.send_message('m2_find_object_camera', [int(freq.get()), int(rate.get()), int(clockwise)])
 
 
 
