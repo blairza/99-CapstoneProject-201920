@@ -151,5 +151,5 @@ class Receiver(object):
         m2_extra.find_object_camera(freq, rate, clockwise)
 
     def m3_camera_pickup(self, rateofchange, speed, clockwiseorcounterclockwise):
-        print("Got camera pickup", rateofchange, speed, clockwiseorcounterclockwise)
+        print("Got camera pickup", rateofchange, speed, clockwiseorcounterclockwise) 
         m3_extra.m3_camera_pickup(self.robot, rateofchange, speed, clockwiseorcounterclockwise)
