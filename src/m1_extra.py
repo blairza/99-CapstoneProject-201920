@@ -9,7 +9,7 @@ def beep_move(robot,frequency,drop):
     robot.drive_system.go(25,25)
     distance = robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
     while True:
-        if(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2):
+        if(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 1.5):
           robot.drive_system.stop()
           break
         if(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() < distance):
@@ -32,7 +32,7 @@ def spin(robot,direction,speed):
 
 def move_to(robot,speed):
     """:type robot : rb.RoseBot"""
-    robot.drive_system.go_forward_until_distance_is_less_than(4.5,speed)
+    robot.drive_system.go_forward_until_distance_is_less_than(2,speed)
 
 def pick_up(robot):
     """:type robot : rb.RoseBot"""
