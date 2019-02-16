@@ -159,7 +159,7 @@ class DriveSystem(object):
         """
         self.go(speed, speed)
         while True:
-            if (self.sensor_system.color_sensor.get_reflected_light_intensity() == color):
+            if (self.sensor_system.color_sensor.get_color() == color):
                 self.stop()
                 break
 
@@ -173,7 +173,7 @@ class DriveSystem(object):
         """
         self.go(speed, speed)
         while True:
-            if (self.sensor_system.color_sensor.get_reflected_light_intensity() != color):
+            if (self.sensor_system.color_sensor.get_color() != color):
                 self.stop()
                 break
 
@@ -284,8 +284,10 @@ class DriveSystem(object):
         """
         self.left_motor.turn_on(speed)
         self.right_motor.turn_on(-speed)
-        if self.sensor_system.camera.get_biggest_blob().get_area() > area:
-            self.stop()
+        while True:
+            if self.sensor_system.camera.get_biggest_blob().get_area() > area:
+                self.stop()
+                break
 
     def spin_counterclockwise_until_sees_object(self, speed, area):
         """
@@ -295,8 +297,10 @@ class DriveSystem(object):
         """
         self.left_motor.turn_on(-speed)
         self.right_motor.turn_on(speed)
-        if self.sensor_system.camera.get_biggest_blob().get_area() > area:
-            self.stop()
+        while True:
+            if self.sensor_system.camera.get_biggest_blob().get_area() > area:
+                self.stop()
+                break
 
 
 ###############################################################################
@@ -769,6 +773,7 @@ class Blob(object):
             self.center.x, self.center.y, self.width, self.height)
 
     def get_area(self):
+        print(self.width*self.height)
         return self.width * self.height
 
     def is_against_left_edge(self):
