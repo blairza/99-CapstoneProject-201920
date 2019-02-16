@@ -23,7 +23,7 @@ def m3_proximity_sensor_pick_up(rosebot, rate_of_change, speed):
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
         rosebot.led_system.turn_both_leds_off()
         time.sleep(1/rate_of_change * (rosebot.sensor_system.ir_proximity_sensor.get_distance()) / 30)
-        if rosebot.sensor_system.ir_proximity_sensor.get_distance() > 1.2:
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance() < 1.2:
             break
     rosebot.drive_system.stop()
     rosebot.arm_and_claw.raise_arm()
@@ -57,9 +57,9 @@ def m3_camera_pickup(rosebot, rateofchange, speed, spin_dir):
     :return:
     """
     if spin_dir == 0:
-        rosebot.drive_system.spin_clockwise_until_sees_object(speed, 400)
+        rosebot.drive_system.spin_clockwise_until_sees_object(speed, 200)
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
 
     if spin_dir == 1:
-        rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 400)
+        rosebot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
