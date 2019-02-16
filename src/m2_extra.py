@@ -17,7 +17,7 @@ def find_object_ir(robot, starting_frequency, rate_of_increase):
         ave = ave / 8
 
         frequency = frequency + (rate_of_increase/ave)
-        robot.SoundSystem.ToneMaker(frequency, 500)
+        robot.sound_system.tone_maker(frequency, 500)
 
         if ave <=3:
             robot.drive_system.stop()
@@ -40,11 +40,11 @@ def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
         ave = ave / 8
 
         frequency = frequency + (rate_of_increase/ave)
-        robot.SoundSystem.ToneMaker(frequency, 500)
+        robot.sound_system.tone_maker(frequency, 500)
 
         if ave <=3:
             robot.drive_system.stop()
-            robot.ArmAndClaw.raise_arm()
+            robot.arm_and_claw.raise_arm()
             break
 
 
