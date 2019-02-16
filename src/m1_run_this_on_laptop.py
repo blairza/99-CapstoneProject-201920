@@ -112,7 +112,7 @@ def grid_frames(teleop_frame, arm_frame, control_frame,sound_frame,color_frame,c
 
 def handle_beep_move(beep_frequency,beep_drop,mqtt_sender):
     print("Got beep frequency", beep_frequency)
-    mqtt_sender.send_message("m1_beep_move", [beep_frequency.get(),beep_drop.get()])
+    mqtt_sender.send_message("m1_beep_move", [float(beep_frequency.get()),float(beep_drop.get())])
 
 def handle_spin(speed,direction,mqtt_sender):
     print("Got direction", direction)

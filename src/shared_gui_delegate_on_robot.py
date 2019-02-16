@@ -128,11 +128,11 @@ class Receiver(object):
 
     def m1_beep_move(self,beep_frequency,beep_drop):
         print("Got beep and move")
-        m1_extra.beep_move(self,float(beep_frequency),float(beep_drop))
+        m1_extra.beep_move(self.robot,float(beep_frequency),float(beep_drop))
 
     def m1_spin(self,speed,direction):
         print("Got spin")
-        m1_extra.spin(self, int(direction), int(speed))
+        m1_extra.spin(self.robot, int(direction), int(speed))
 
     def m2_find_object_ir(self, freq, rate):
         print('Got find object ir')
