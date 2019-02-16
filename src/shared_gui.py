@@ -110,7 +110,7 @@ def get_proximity_frame(window, mqtt_sender):
 
     speed_label = ttk.Label(frame, text='Speed')
     speed_entry = ttk.Entry(frame, width=8)
-    speed_entry.insert(100)
+    speed_entry.insert(0, '100')
 
     frame_label.grid(row=0, column=1)
     forward_button.grid(row=1, column=0)
