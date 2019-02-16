@@ -82,8 +82,8 @@ def main():
 
     beep_move_button["command"] = lambda: handle_beep_move(beep_frequency,beep_drop,sender)
     spin_button["command"] = lambda: handle_spin(speed_entry,direction,sender)
-    move_to_button["command"] = lambda: handle_move_to(speed_entry,direction,sender)
-    pick_up_button["command"] = lambda: handle_pick_up(speed_entry,direction,sender)
+    move_to_button["command"] = lambda: handle_move_to(speed_entry,sender)
+    pick_up_button["command"] = lambda: handle_pick_up(sender)
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
@@ -124,13 +124,13 @@ def handle_spin(speed,direction,mqtt_sender):
     print("Got direction", direction)
     mqtt_sender.send_message("m1_spin",[speed.get(),direction.get()])
 
-def handle_move_to(speed,direction,mqtt_sender):
+def handle_move_to(speed,mqtt_sender):
     print("Got move to")
-    mqtt_sender.send_message("m1_move_to",[speed.get(),direction.get()])
+    mqtt_sender.send_message("m1_move_to",[speed.get()])
 
-def handle_pick_up(speed,direction,mqtt_sender):
+def handle_pick_up(mqtt_sender):
     print("Got pick up")
-    mqtt_sender.send_message((speed.get(),direction.get()))
+    mqtt_sender.send_message("m1_pick_up")
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

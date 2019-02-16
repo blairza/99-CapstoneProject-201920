@@ -191,6 +191,7 @@ class DriveSystem(object):
             ave = 0
             for k in range(8):
                 ave = ave + self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+                time.sleep(0.05)
             ave = ave/8
 
             if ave <= inches:
@@ -210,8 +211,8 @@ class DriveSystem(object):
             ave = 0
             for k in range(8):
                 ave = ave + self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+                time.sleep(0.05)
             ave = ave / 8
-
             if ave >= inches:
                 self.stop()
                 break
