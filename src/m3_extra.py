@@ -75,6 +75,7 @@ def m3_camera_pickup(rosebot, rateofchange, speed, spin_dir):
         rosebot.drive_system.stop()
         m3_proximity_sensor_pick_up(rosebot, rateofchange, speed)
 
+
 class m3_EmotionSystem(object):
 
     def __init__(self):
@@ -87,4 +88,11 @@ class m3_EmotionSystem(object):
             'Anxious',
             'Confused',
         )
-        
+        self.current_emotion = self.emotions(0)
+
+    def __repr__(self):
+        return self.current_emotion
+
+    def change_emotion(self, emotion_number):
+        self.current_emotion = self.emotions(emotion_number)
+

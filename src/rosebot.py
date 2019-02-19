@@ -13,7 +13,7 @@
 import ev3dev.ev3 as ev3
 import time
 import math
-
+import m3_extra
 
 ###############################################################################
 #    RoseBot class.
@@ -37,6 +37,7 @@ class RoseBot(object):
         self.arm_and_claw = ArmAndClaw(self.sensor_system.touch_sensor)
         self.beacon_system = BeaconSystem()
         self.display_system = DisplaySystem()
+        self.m3_emotion_system = m3_extra.m3_EmotionSystem()
 
 
 ###############################################################################
