@@ -37,3 +37,36 @@ def move_to(robot,speed):
 def pick_up(robot):
     """:type robot : rb.RoseBot"""
     beep_move(robot,1,0.2)
+
+########################
+# This is the beginning of my Sprint 3 code
+########################
+
+def trivia_list():
+    color_list = ["One old wives’ tale claims that if a woman is buried wearing the color black, she’ll come back to haunt the family","Blue birds cannot see the color blue","Green was a sacred color to the Egyptians representing the hope and joy of spring","In Japan yellow represents courage",]
+    #driving_list
+
+def blue_danube():
+    song = []
+
+def special_moves(robot,num):
+    if(num == 1):
+        robot.drive_system.go(100,50)
+    if(num == 2):
+        robot.sound_system.tone_maker.play_tone_sequence(blue_danube.song())
+    if(num == 3):
+        pick_up(robot)
+    if(num ==4):
+        print("yellow")
+#oof its yellow btw
+
+
+def color_trivia(robot,color,speed):
+    """:type robot : rb.RoseBot"""
+    robot.drive_system.go_straight_until_color_is(color,speed)
+    for k in range (1,8):
+        if(robot.sensor_system.color_sensor.get_color() == k):
+            robot.sound_system.speech_maker.speak("Fun fact")
+            time.sleep(0.1)
+            robot.sound_system.speech_maker.speak(trivia_list.color_list[k-1])
+            special_moves(robot,k)
