@@ -144,6 +144,10 @@ class Receiver(object):
         print("Got move to")
         m1_extra.move_to(self.robot, int(speed))
 
+    def m1_color(self,color):
+        print("Got color")
+        m1_extra.color_trivia(self.robot,color,25)
+
     def m1_pick_up(self):
         print("Got pick up")
         m1_extra.pick_up(self.robot)

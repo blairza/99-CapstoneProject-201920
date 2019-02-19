@@ -60,6 +60,8 @@ def main():
     label.grid()
     entry.grid()
     button.grid()
+
+    button["command"] = lambda: handle_button(entry,sender)
     """frame_label = ttk.Label(frame_me,text= "Beep and move towards objects")
     beep_frequency = ttk.Entry(frame_me,width=5)
     beep_freq_label = ttk.Label(frame_me,text="Frequence of beeps")
@@ -140,6 +142,10 @@ def handle_move_to(speed,mqtt_sender):
 def handle_pick_up(mqtt_sender):
     print("Got pick up")
     mqtt_sender.send_message("m1_pick_up")
+
+def handle_button(color,mqtt_sender):
+    print("Got color value",color)
+    mqtt_sender.send_message("m1_color",[color])
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
