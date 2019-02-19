@@ -51,7 +51,16 @@ def main():
     frame_me = ttk.Frame(windher,padding=10,borderwidth=5,relief = "groove")
     frame_me.grid()
 
-    frame_label = ttk.Label(frame_me,text= "Beep and move towards objects")
+    title = ttk.Label(frame_me,text = "TRIVIA BOT")
+    label = ttk.Label(frame_me,text = "Enter a number from 1 to 7 to learn something new")
+    entry = ttk.Entry(frame_me,width = 10)
+    button = ttk.Button(frame_me,text = "Trivia Time")
+
+    title.grid()
+    label.grid()
+    entry.grid()
+    button.grid()
+    """frame_label = ttk.Label(frame_me,text= "Beep and move towards objects")
     beep_frequency = ttk.Entry(frame_me,width=5)
     beep_freq_label = ttk.Label(frame_me,text="Frequence of beeps")
     beep_drop = ttk.Entry(frame_me,width=5)
@@ -83,7 +92,7 @@ def main():
     beep_move_button["command"] = lambda: handle_beep_move(beep_frequency,beep_drop,sender)
     spin_button["command"] = lambda: handle_spin(speed_entry,direction,sender)
     move_to_button["command"] = lambda: handle_move_to(speed_entry,sender)
-    pick_up_button["command"] = lambda: handle_pick_up(sender)
+    pick_up_button["command"] = lambda: handle_pick_up(sender)"""
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
