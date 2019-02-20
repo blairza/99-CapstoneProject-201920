@@ -91,9 +91,6 @@ class m3_EmotionSystem(object):
         self.current_emotion = self.emotions[0]
         self.num_of_changes = 0
 
-    def __repr__(self):
-        return self.current_emotion
-
     def change_emotion(self, emotion_number):
         self.current_emotion = self.emotions(emotion_number)
         self.num_of_changes += 1

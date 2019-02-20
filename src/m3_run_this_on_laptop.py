@@ -11,6 +11,7 @@ import mqtt_remote_method_calls as com
 import tkinter
 from tkinter import ttk
 import shared_gui
+import shared_gui_delegate_on_robot as sgd
 
 
 def main():
@@ -176,7 +177,7 @@ def m3_get_sprint3_frame(window, mqtt_sender):
     check_emotion_button.grid(row=5, column=1)
 
     # Set the Button callbacks:
-    check_emotion_button["command"] = lambda: handle_check_emotion()
+    check_emotion_button["command"] = lambda: handle_check_emotion(mqtt_sender)
 
     #IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
     #camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
@@ -184,8 +185,6 @@ def m3_get_sprint3_frame(window, mqtt_sender):
     #camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
     #                                                                  1, mqtt_sender)
     return frame
-
-
 
 
 def handle_IR_pickup(rateofchange, speed, mqtt_sender):
@@ -197,12 +196,14 @@ def handle_camera_pickup(rateofchange, speed, clockwiseorcounterclockwise, mqtt_
     print("Handle Camera find and pickup")
     mqtt_sender.send_message('m3_camera_pickup', [rateofchange, speed, clockwiseorcounterclockwise])
 
-def handle_check_emotion():
-    root2 = tkinter.Toplevel()
-    window2 = ttk.Frame(root2, padding=20)
+
+def handle_check_emotion(mqtt_sender):
+    window2 = ttk.Frame(padding=20)
     window2.grid()
 
-    emotionlabel = ttk.Label(window2, text="The current emotion is:")
+    emotion = mqtt_sender.send_message('m3_check_emotion', [])
+    emotionlabel = ttk.Label(window2, text="The current emotion is: \n {}".format(emotion))
+    emotionlabel.grid()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

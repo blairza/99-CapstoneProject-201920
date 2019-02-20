@@ -191,3 +191,8 @@ class Receiver(object):
     def play_prebuilt_music(self, song, times):
         print('Music time')
         m2_extra.play_prebuilt_music(self.robot, song, times)
+
+    def m3_check_emotion(self):
+        print("Check Emotion")
+        print(self.robot.m3_emotion_system.current_emotion)
+        return self.robot.m3_emotion_system.current_emotion
