@@ -175,8 +175,9 @@ def m3_get_sprint3_frame(window, mqtt_sender):
     emotion_ir_find_button.grid(row=5, column=2)
     check_emotion_button.grid(row=5, column=1)
 
-
     # Set the Button callbacks:
+    check_emotion_button["command"] = lambda: handle_check_emotion()
+
     #IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
     #camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
     #                                                                  0, mqtt_sender)
@@ -196,10 +197,13 @@ def handle_camera_pickup(rateofchange, speed, clockwiseorcounterclockwise, mqtt_
     print("Handle Camera find and pickup")
     mqtt_sender.send_message('m3_camera_pickup', [rateofchange, speed, clockwiseorcounterclockwise])
 
+def handle_check_emotion():
+    root2 = tkinter.Toplevel()
+    window2 = ttk.Frame(root2, padding=20)
+    window2.grid()
 
-#def handle_ir_ledflash(rateofchange, mqtt_sender):
-#    print("Handle IR LED Flash")
-#    mqtt_sender.send_message('m3_ir_ledflash', [rateofchange])
+    emotionlabel = ttk.Label(window2, text="The current emotion is:")
+
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
