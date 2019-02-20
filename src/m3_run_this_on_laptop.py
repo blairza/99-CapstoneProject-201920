@@ -62,6 +62,16 @@ def main():
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
+
+    my_root = tkinter.Tk()
+    my_root.title("Sprint 3 Ben personal Project")
+
+    new_frame = ttk.Frame(my_root, padding=10, borderwidth=5)
+    new_frame.grid()
+    sprint3_frame = m3_get_sprint3_frame(new_frame, mqtt_sender)
+
+
+
     root.mainloop()
 
 
@@ -121,6 +131,50 @@ def m3_get_my_frame(window, mqtt_sender):
     camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
                                                                       1, mqtt_sender)
     return frame
+
+
+def m3_get_sprint3_frame(window, mqtt_sender):
+    """
+        Constructs and returns a frame on the given window, where the frame has
+        Button objects to run the robot's camera programs (via MQTT).
+          :type  window:       ttk.Frame | ttk.Toplevel
+          :type  mqtt_sender:  com.MqttClient
+        """
+    # Construct the frame to return:
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    # Construct the widgets on the frame:
+    frame_label = ttk.Label(frame, text="Ben's frame")
+    IR_pickup_button = ttk.Button(frame, text="Use the IR Detector to pick up an object")
+    IR_ledflash_button = ttk.Button(frame, text="Turn the LEDS on the Lego Unit on/off based on proximity to an object")
+    led_rateofchange = ttk.Entry(frame)
+    rateofchange_label = ttk.Label(frame, text="Ratio of how fast you want the LEDs to flash on/off")
+    sprint2_speed_entry = ttk.Entry(frame)
+    sprint2_speed_label = ttk.Label(frame, text="The speed at which it moves towards the object")
+    camera_find_clockbutton = ttk.Button(frame, text="Use the Camera to find and pickup an object by spinning clockwise")
+    camera_find_countbutton = ttk.Button(frame, text="Use the Camera to find and pickup an objecy by spinning "
+                                                     "counterclockwise")
+
+    # Grid the widgets:
+    frame_label.grid(row=0, column=1)
+    IR_pickup_button.grid(row=1, column=1)
+    sprint2_speed_entry.grid(row=4, column=0)
+    sprint2_speed_label.grid(row=4, column=1)
+    led_rateofchange.grid(row=2, column=0)
+    rateofchange_label.grid(row=2, column=1)
+    camera_find_clockbutton.grid(row=3, column=0)
+    camera_find_countbutton.grid(row=3, column=1)
+
+    # Set the Button callbacks:
+    IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
+    camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+                                                                      0, mqtt_sender)
+    camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+                                                                      1, mqtt_sender)
+    return frame
+
+
 
 
 def handle_IR_pickup(rateofchange, speed, mqtt_sender):
