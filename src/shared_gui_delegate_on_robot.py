@@ -200,4 +200,11 @@ class Receiver(object):
     def m3_heckle(self):
         print("Heckle the Robot")
         m3_extra.m3_heckle(self.robot)
-    
+
+    def m3_praise(self):
+        print("Praise the Robot")
+        m3_extra.m3_praise(self.robot)
+
+    def m3_change_emotion(self, emotion):
+        print("Change the Robot's Emotion")
+        m3_extra.m3_change_emotion(self.robot, int(emotion))
