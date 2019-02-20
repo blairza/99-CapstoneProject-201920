@@ -92,7 +92,7 @@ class m3_EmotionSystem(object):
         self.num_of_changes = 0
 
     def change_emotion(self, emotion_number):
-        self.current_emotion = self.emotions(emotion_number)
+        self.current_emotion = self.emotions[emotion_number]
         self.num_of_changes += 1
 
 
