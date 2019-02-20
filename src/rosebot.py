@@ -392,7 +392,7 @@ class SensorSystem(object):
     """
     def __init__(self):
         self.touch_sensor = TouchSensor(1)
-        self.color_sensor = ColorSensor(3)
+        self.color_sensocar = ColorSensor(3)
         self.ir_proximity_sensor = InfraredProximitySensor(4)
         self.camera = Camera()
         # self.ir_beacon_sensor = InfraredBeaconSensor(4)

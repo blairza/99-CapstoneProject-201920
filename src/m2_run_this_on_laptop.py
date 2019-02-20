@@ -5,7 +5,6 @@
   Authors:  Your professors (for the framework)
     and Trey Kline.
   Winter term, 2018-2019.
-  NOTE TO ZANE AND BEN: If you edit my program you double homophobic
 """
 
 import mqtt_remote_method_calls as com
@@ -30,12 +29,18 @@ def main():
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
     root.title('BSSE 420 Bapstone Broject')
+    music_window = tkinter.Tk()
+    music_window.title('Maestro Bot')
+
+
 
     # -------------------------------------------------------------------------
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
     main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
+    music_frame = ttk.Frame(music_window, padding=10, borderwidth=5, relief='groove')
     main_frame.grid()
+    music_frame.grid()
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -47,17 +52,19 @@ def main():
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
-
+    maestro_bot_frames = get_music_frames(music_window, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
     grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, color_frame, proximity_frame, camera_frame, find_object)
+    maestro_bot_frames.grid(row=0, column=0)
 
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+    music_window.mainloop()
 
 
 def get_shared_frames(main_frame, mqtt_sender):
@@ -110,12 +117,48 @@ def get_my_frames(window, mqtt_sender):
 
     return frame
 
+def get_music_frames(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_lable = ttk.Label(frame, text='Maestro Bot')
+    songs_lable = ttk.Label(frame, text='Play built in songs')
+    tempo_lable = ttk.Label(frame, text='tempo')
+
+    sans = ttk.Button(frame, text='Sans Undertale')
+    dance_button = ttk.Button(frame, text='Dance')
+    compose_music = ttk.Button(frame, text='Compose Music')
+    read_music = ttk.Button(frame, text='Read Music')
+    dame_tu_cosita = ttk.Button(frame, text='Dame tu Cosita')
+
+    tempo_box = ttk.Entry(frame, width='8')
+    times_box = ttk.Entry(frame, width='8')
+
+    frame_lable.grid(row=0, column=0)
+    songs_lable.grid(row=1, column=0)
+    sans.grid(row=1, column=1)
+    times_box.grid(row=1, column=2)
+    dance_button.grid(row=2, column=0)
+    compose_music.grid(row=3, column=0)
+    read_music.grid(row=4, column=0)
+    tempo_lable.grid(row=4, column=1)
+    tempo_box.grid(row=4, column=2)
+    dame_tu_cosita.grid(row=5, column=0)
+
+    sans['command'] = lambda :
+
+    return frame
+
+
+def handle
+
+
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())
     mqtt_sender.send_message('m2_find_object_ir', [int(freq.get()), int(rate.get())])
 
 def handle_find_object_camera(freq, rate, clockwise, mqtt_sender):
-    print('Spinning and the finding object', freq.get(), rate.get(), int(clockwise))
+    print('Spinning and the finding object', freq.get(), rate.get(), clockwise)
     mqtt_sender.send_message('m2_find_object_camera', [int(freq.get()), int(rate.get()), int(clockwise)])
 
 
