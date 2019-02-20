@@ -178,7 +178,7 @@ def m3_get_sprint3_frame(window, mqtt_sender):
 
     # Set the Button callbacks:
     check_emotion_button["command"] = lambda: handle_check_emotion(mqtt_sender)
-
+    heckle_button["command"] = lambda: handle_heckle(mqtt_sender)
     #IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
     #camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
     #                                                                  0, mqtt_sender)
@@ -204,6 +204,11 @@ def handle_check_emotion(mqtt_sender):
     emotion = mqtt_sender.send_message('m3_check_emotion', [])
     emotionlabel = ttk.Label(window2, text="The current emotion is: \n {}".format(emotion))
     emotionlabel.grid()
+
+
+def handle_heckle(mqtt_sender):
+    print("Handle Heckle")
+    mqtt_sender.send_message('m3_heckle', [])
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

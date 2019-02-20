@@ -196,3 +196,8 @@ class Receiver(object):
         print("Check Emotion")
         print(self.robot.m3_emotion_system.current_emotion)
         return self.robot.m3_emotion_system.current_emotion
+
+    def m3_heckle(self):
+        print("Heckle the Robot")
+        m3_extra.m3_heckle(self.robot)
+    
