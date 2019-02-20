@@ -200,12 +200,12 @@ def handle_camera_pickup(rateofchange, speed, clockwiseorcounterclockwise, mqtt_
 
 
 def handle_check_emotion(mqtt_sender):
-    window2 = ttk.Frame(padding=20)
-    window2.grid()
+    #window2 = ttk.Frame(padding=20)
+    #window2.grid()
 
-    emotion = mqtt_sender.send_message('m3_check_emotion', [])
-    emotionlabel = ttk.Label(window2, text="The current emotion is: \n {}".format(emotion))
-    emotionlabel.grid()
+    mqtt_sender.send_message('m3_check_emotion', [])
+    #emotionlabel = ttk.Label(window2, text="The current emotion is: \n {}".format(emotion))
+    #emotionlabel.grid()
 
 
 def handle_heckle(mqtt_sender):
