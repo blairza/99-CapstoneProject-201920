@@ -142,11 +142,12 @@ def get_music_frames(window, mqtt_sender):
     dropdown.grid(row=1, column=1)
     times_box.grid(row=1, column=2)
     dance_button.grid(row=2, column=0)
-    times_dance_box.grid(row=2, column=1)
+    times_dance_box.grid(row=2, column=2)
     bpm_dance_box.grid(row=2, column=1)
     compose_music.grid(row=3, column=0)
     read_music.grid(row=4, column=0)
     tempo_lable.grid(row=4, column=1)
+    tempo_box.grid(row=4, column=2)
     dame_tu_cosita.grid(row=5, column=0)
 
     dance_button['command'] = lambda : handle_dance(bpm_dance_box, times_dance_box, mqtt_sender)
@@ -164,11 +165,11 @@ def handle_play_prebuilt_music(song, times, mqtt_sender):
 
 def handle_dance(tempo, times, mqtt_sender):
     print('Dancing at ', tempo.get(), 'bpm', times.get(), 'times')
-    mqtt_sender.send_message('dance', [tempo.get(), times.get()])
+    mqtt_sender.send_message('dance', [int(tempo.get()), int(times.get())])
 
 def handle_read_music(tempo, mqtt_sender):
     print('Reading music')
-    mqtt_sender.send_message('read_music', [tempo.get()])
+    mqtt_sender.send_message('read_music', [int(tempo.get())])
 
 def handle_write_music(mqtt_sender):
     print('Writing Music')

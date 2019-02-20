@@ -140,18 +140,19 @@ def read_music(robot, tempo):
     colors = []
     notes = []
     lengths = []
-    robot.go(50, 50)
+    robot.drive_system.go(50, 50)
     while True:
-        current_color = robot.sensor_system.color_sensor.get_color()
+        current_color = robot.sensor_system.color_sensocar.get_color()
         colors.append(current_color)
         while True:
-            if robot.sensor_system.color_sensor.get_color() != current_color:
+            print(robot.sensor_system.color_sensocar.get_color())
+            if robot.sensor_system.color_sensocar.get_color() != current_color:
                 break
             elif robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=5:
                 break
 
         if robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=5:
-            robot.stop()
+            robot.drive_system.stop()
             break
     for k in range(len(colors)):
         notes.append(color_to_note(colors[k]))
@@ -293,7 +294,6 @@ def note_finder(note):
         'D8':  4699,
         'DS8': 4978,
     }
-    print(note, note_matrix[note])
     return note_matrix[note]
 
 def test():
