@@ -122,7 +122,7 @@ def get_music_frames(window, mqtt_sender):
     frame.grid()
 
     frame_lable = ttk.Label(frame, text='Maestro Bot')
-    songs_lable = ttk.Label(frame, text='Play built in songs')
+    songs_button = ttk.Button(frame, text='Play built in songs')
     tempo_lable = ttk.Label(frame, text='tempo')
 
     dropdown = ttk.Combobox(frame)
@@ -138,7 +138,7 @@ def get_music_frames(window, mqtt_sender):
     times_dance_box = ttk.Entry(frame, width='8')
 
     frame_lable.grid(row=0, column=0)
-    songs_lable.grid(row=1, column=0)
+    songs_button.grid(row=1, column=0)
     dropdown.grid(row=1, column=1)
     times_box.grid(row=1, column=2)
     dance_button.grid(row=2, column=0)
@@ -147,24 +147,24 @@ def get_music_frames(window, mqtt_sender):
     compose_music.grid(row=3, column=0)
     read_music.grid(row=4, column=0)
     tempo_lable.grid(row=4, column=1)
-    tempo_box.grid(row=4, column=2)
     dame_tu_cosita.grid(row=5, column=0)
 
     dance_button['command'] = lambda : handle_dance(bpm_dance_box, times_dance_box, mqtt_sender)
     read_music['command'] = lambda : handle_read_music(tempo_box, mqtt_sender)
     compose_music['command']=lambda : handle_write_music(mqtt_sender)
     dame_tu_cosita['command'] = lambda : handle_dame_tu_cosita(mqtt_sender)
+    songs_button['command'] = lambda : handle_play_prebuilt_music(dropdown.current(), times_box, mqtt_sender)
 
     return frame
 
 
 def handle_play_prebuilt_music(song, times, mqtt_sender):
     print('Playing song', song, times.get(), 'times')
-    mqtt_sender.send_message('play_prebuilt_music', [song, int(times.get())])
+    mqtt_sender.send_message('play_prebuilt_music', [int(song), int(times.get())])
 
 def handle_dance(tempo, times, mqtt_sender):
-    print('Dancing at ', tempo, 'bpm', times, 'times')
-    mqtt_sender.send_message('dance', [tempo.get()])
+    print('Dancing at ', tempo.get(), 'bpm', times.get(), 'times')
+    mqtt_sender.send_message('dance', [tempo.get(), times.get()])
 
 def handle_read_music(tempo, mqtt_sender):
     print('Reading music')

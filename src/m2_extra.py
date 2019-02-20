@@ -7,7 +7,7 @@ import time
 import math
 import random
 from PIL import Image
-from playsound import playsound
+#from playsound import playsound
 
 
 def find_object_ir(robot, starting_frequency, rate_of_increase):
@@ -54,11 +54,14 @@ def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
             robot.arm_and_claw.raise_arm()
             break
 
-def dame_tu_cosita(robot):
-    find_object_ir(robot, 0, 100)
-    img = Image.open('dame.jpg')
-    img.show()
-    playsound('dame_music.mp3')
+
+def dame_tu_cosita():
+#    #find_object_ir(robot, 0, 100)
+#    img = Image.open('dame.jpg')
+#    img.show()
+#    playsound('dame_music.mp3')
+    pass
+
 
 
 def write_music(robot):
@@ -183,16 +186,18 @@ def dance(robot, bpm, times):
 
 
 def play_prebuilt_music(robot, song, times):
-    sans_undertale = [('D4', 'D4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'C4', 'C4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'B3', 'B3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'AS3', 'AS3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4'), (0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25)]
-    if song == 1:
+    sans_undertale = [('D4', 'D4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'C4', 'C4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'B3', 'B3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'AS3', 'AS3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4'), (0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25,0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25,0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25)]
+    if song == 0:
         for k in range(times):
             play_music(robot, sans_undertale[0], sans_undertale[1], 120)
 
 
 def play_music(robot, notes, lengths, tempo):
-    tick = (60 / tempo) / 1000
+    tick = (60 / tempo)*1000
+    print(len(notes))
+    print(len(lengths))
     for k in range(len(notes)):
-        robot.sound_system.tone_maker.play_tone(note_finder(notes[k]), tick*lengths[k])
+        robot.sound_system.tone_maker.play_tone(note_finder(notes[k]), tick*lengths[k]).wait()
     return
 
 
