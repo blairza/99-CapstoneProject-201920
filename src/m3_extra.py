@@ -85,7 +85,7 @@ class m3_EmotionSystem(object):
             'Happy',
             'Mad',
             'Confident',
-            'Anxious',
+            'Curious',
             'Confused',
         )
         self.current_emotion = self.emotions(0)
@@ -101,6 +101,7 @@ class m3_EmotionSystem(object):
 
 def m3_clockwise_until_sees_object(rosebot, speed, area):
     """
+    The same as the function in drive system, except it goes for a limited amount of time
 
     :type rosebot: rb.RoseBot
     :param speed:
@@ -120,6 +121,7 @@ def m3_clockwise_until_sees_object(rosebot, speed, area):
 
 def m3_counterclockwise_until_sees_object(rosebot, speed, area):
     """
+    The same as the function in drive system, except it goes for a limited amount of time
 
     :type rosebot: rb.RoseBot
     :param speed:
@@ -146,9 +148,7 @@ def m3_emotion_camera_pickup(rosebot, spin_dir):
     :param spin_dir:
     :return:
     """
-    if rosebot.m3_emotion_system.current_emotion == 'Depressed':
-        pass
-    else:
+    if rosebot.m3_emotion_system.current_emotion != 'Depressed':
         rosebot.m3_emotion_system.change_emotion(5)
         if spin_dir == 0:
             if m3_clockwise_until_sees_object(rosebot, 30, 50) is True:
@@ -166,11 +166,14 @@ def m3_emotion_camera_pickup(rosebot, spin_dir):
 
 def m3_change_emotion(rosebot, emotionnum):
     """
+    This is a callable function to change the emotion of the robot from an entry without crashing if the number is too
+    large
 
     :type rosebot: rb.RoseBot
     :param emotionnum:
     :return:
     """
+
     if emotionnum < 7:
         rosebot.m3_emotion_system.change_emotion(emotionnum)
     else:
@@ -179,11 +182,65 @@ def m3_change_emotion(rosebot, emotionnum):
 
 def m3_emotion_by_color(rosebot, speed):
     """
+    Goes until it sees any color and then converts that color's number into an emotion. Does not run if the robot is
+    depressed
 
     :type rosebot: rb.RoseBot
     :param speed:
     :return:
     """
-    rosebot.drive_system.go_straight_until_color_is_not(0, speed)
-    if rosebot.sensor_system.color_sensocar.get_color() < 8:
-        rosebot.m3_emotion_system.change_emotion(rosebot.sensor_system.color_sensocar.get_color() -1)
+    if rosebot.m3_emotion_system.current_emotion == "depressed":
+        pass
+    else:
+        rosebot.drive_system.go_straight_until_color_is_not(0, speed)
+        if rosebot.sensor_system.color_sensocar.get_color() < 8:
+            rosebot.m3_emotion_system.change_emotion(rosebot.sensor_system.color_sensocar.get_color() - 1)
+
+
+def m3_heckle(rosebot):
+    """
+    Heckle the robot, making its emotion either indifferent, if it is happy or confident, or depressed, if it is not
+
+    :type rosebot: rb.RoseBot
+    :return:
+    """
+    if rosebot.m3_emotion_system.current_emotion == "Happy" or rosebot.m3_emotion_system.current_emotion == "Confident":
+        rosebot.m3_emotion_system.change_emotion(0)
+    else:
+        rosebot.m3_emotion_system.change_emotion(1)
+
+
+def m3_praise(rosebot):
+    """
+    Praise the robot, making its emotion either indifferent, if it is depreseed, or confident in any other case
+
+    :type rosebot: rb.RoseBot
+    :return:
+    """
+    if rosebot.m3_emotion_system.current_emotion == "Depressed":
+        rosebot.m3_emotion_system.change_emotion(0)
+    else:
+        rosebot.m3_emotion_system.change_emotion(4)
+
+
+def m3_emotion_find(rosebot, speed):
+    """
+    If depressed, does nothing, otherwise, it will become curious and will see if there is an object within 10 units
+    if not, will become confused, move forward for 3 seconds, and then check again. Will become happy if there is something
+    otherwise, no change
+
+    :type rosebot: rb.RoseBot
+    :param speed:
+    :return:
+    """
+    if rosebot.m3_emotion_system.current_emotion != "Depressed":
+        rosebot.m3_emotion_system.change_emotion(5)
+        if rosebot.sensor_system.ir_proximity_sensor.get_distance() > 10:
+            rosebot.m3_emotion_system.change_emotion(6)
+            rosebot.drive_system.go(speed, speed)
+            time.sleep(3)
+            rosebot.drive_system.stop()
+            if rosebot.sensor_system.ir_proximity_sensor.get_distance() < 10:
+                rosebot.m3_emotion_system.change_emotion(2)
+        else:
+            rosebot.m3_emotion_system.change_emotion(2)

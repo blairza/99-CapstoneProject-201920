@@ -145,33 +145,43 @@ def m3_get_sprint3_frame(window, mqtt_sender):
     frame.grid()
 
     # Construct the widgets on the frame:
-    frame_label = ttk.Label(frame, text="Ben's frame")
-    IR_pickup_button = ttk.Button(frame, text="Use the IR Detector to pick up an object")
-    IR_ledflash_button = ttk.Button(frame, text="Turn the LEDS on the Lego Unit on/off based on proximity to an object")
-    led_rateofchange = ttk.Entry(frame)
-    rateofchange_label = ttk.Label(frame, text="Ratio of how fast you want the LEDs to flash on/off")
-    sprint2_speed_entry = ttk.Entry(frame)
-    sprint2_speed_label = ttk.Label(frame, text="The speed at which it moves towards the object")
-    camera_find_clockbutton = ttk.Button(frame, text="Use the Camera to find and pickup an object by spinning clockwise")
-    camera_find_countbutton = ttk.Button(frame, text="Use the Camera to find and pickup an objecy by spinning "
+    frame_label = ttk.Label(frame, text="Ben's sprint 3 frame")
+    heckle_button = ttk.Button(frame, text="Heckle the Robot")
+    praise_button = ttk.Button(frame, text="Praise the Robot")
+    change_emotion_entry = ttk.Entry(frame)
+    change_emotion_button = ttk.Button(frame, text="Put in a number to change the emotion to that number")
+    sprint3_speed_entry = ttk.Entry(frame)
+    sprint3_speed_label = ttk.Label(frame, text="The speed at which it moves towards the object")
+    emotion_find_clockbutton = ttk.Button(frame, text="Use the Camera to find and pickup an object by spinning"
+                                                      " clockwise")
+    emotion_find_countbutton = ttk.Button(frame, text="Use the Camera to find and pickup an object by spinning "
                                                      "counterclockwise")
+    emotion_by_color_button = ttk.Button(frame, text="Change the emotion by reading a color")
+    emotion_ir_find_button = ttk.Button(frame, text="See if there is an object in front of the robot")
+    check_emotion_button = ttk.Button(frame, text="Open a new frame with the current emotion listed")
+
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
-    IR_pickup_button.grid(row=1, column=1)
-    sprint2_speed_entry.grid(row=4, column=0)
-    sprint2_speed_label.grid(row=4, column=1)
-    led_rateofchange.grid(row=2, column=0)
-    rateofchange_label.grid(row=2, column=1)
-    camera_find_clockbutton.grid(row=3, column=0)
-    camera_find_countbutton.grid(row=3, column=1)
+    heckle_button.grid(row=1, column=0)
+    praise_button.grid(row=1, column=2)
+    sprint3_speed_label.grid(row=2, column=2)
+    sprint3_speed_entry.grid(row=2, column=0)
+    change_emotion_entry.grid(row=3, column=0)
+    change_emotion_button.grid(row=3, column=2)
+    emotion_find_clockbutton.grid(row=4, column=0)
+    emotion_find_countbutton.grid(row=4, column=2)
+    emotion_by_color_button.grid(row=5, column=0)
+    emotion_ir_find_button.grid(row=5, column=2)
+    check_emotion_button.grid(row=5, column=1)
+
 
     # Set the Button callbacks:
-    IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
-    camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
-                                                                      0, mqtt_sender)
-    camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
-                                                                      1, mqtt_sender)
+    #IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
+    #camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+    #                                                                  0, mqtt_sender)
+    #camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
+    #                                                                  1, mqtt_sender)
     return frame
 
 
