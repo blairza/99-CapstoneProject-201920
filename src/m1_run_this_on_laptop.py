@@ -145,7 +145,7 @@ def handle_pick_up(mqtt_sender):
 
 def handle_button(color,mqtt_sender):
     print("Got color value",color)
-    mqtt_sender.send_message("m1_color",[color])
+    mqtt_sender.send_message("m1_color",[color.get()])
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------

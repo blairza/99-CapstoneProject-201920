@@ -146,7 +146,7 @@ class Receiver(object):
 
     def m1_color(self,color):
         print("Got color")
-        m1_extra.color_trivia(self.robot,color,25)
+        m1_extra.color_trivia(self.robot,int(color),int(25))
 
     def m1_pick_up(self):
         print("Got pick up")

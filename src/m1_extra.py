@@ -51,7 +51,7 @@ def new_moon(robot):
 
 
 def blue_danube():
-    song = [(261.63,1000),(329.63,1000),(392,1000),(392,1000,1000),(739.99,1000),(739.99,1000,1000),(659.25,1000),(659.25,1000,1000),(261.63,1000),(261.63,1000),(329.63,1000),(392,1000),(392,1000,1000),(739.99,1000),(739.99,1000,1000),(698.46,1000),(698.46,1000,1000),(293.66,1000),(293.66,1000),(349.23,1000),(440,1000),(440,4000),(369.99,1000),(392,1000),(659.25,4000),(523.25,1000),(329.63,1000),(329.63,2000),(293.66,1000),(440,2000),(392,1000),(261.63,1500),(261.63,500),(261.63,1000),(261.63,1000)]
+    song = [(261.63,500,100),(329.63,500,100),(392,500,100),(392,500,1000),(739.99,500,100),(739.99,500,1000),(659.25,500,100),(659.25,500,1000),(261.63,500,100),(261.63,500,100),(329.63,500,100),(392,500,100),(392,500,1000),(739.99,500,100),(739.99,500,1000),(698.46,500,100),(698.46,500,1000),(293.66,500,100),(293.66,500,100),(349.23,500,100),(440,500,100),(440,2000,100),(369.99,500,100),(392,500,100),(659.25,2000,100),(523.25,500,100),(329.63,500,100),(329.63,1000,100),(293.66,500,100),(440,1000,100),(392,500,100),(261.63,750,100),(261.63,250,100),(261.63,500,100),(261.63,500)]
     return song
 
 
@@ -111,8 +111,9 @@ def color_trivia(robot,color,speed):
     """:type robot : rb.RoseBot"""
     color_list = ["One old wives’ tale claims that if a woman is buried wearing the color black, she’ll come back to haunt the family","Blue birds cannot see the color blue","Green was a sacred color to the Egyptians representing the hope and joy of spring","In Japan yellow represents courage","The color red does not make bulls angry because they are colorblind","The sun is actually white but looks yellow because of refraction","Too much of the color brown can act as a depressant"]
     robot.drive_system.go_straight_until_color_is(color,speed)
+    print(robot.sensor_system.color_sensocar.get_color())
     for k in range (1,8):
-        if(robot.sensor_system.color_sensor.get_color() == k):
+        if(robot.sensor_system.color_sensocar.get_color() == k):
             robot.sound_system.speech_maker.speak("Fun fact")
             time.sleep(0.1)
             robot.sound_system.speech_maker.speak(color_list[k-1])
