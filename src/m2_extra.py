@@ -55,11 +55,10 @@ def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
             break
 
 def dame_tu_cosita():
-    find_object_ir(0, 100)
+    #find_object_ir(0, 100)
     img = Image.open('dame.jpg')
     img.show()
     playsound('dame_music.mp3')
-
 
 
 def write_music(robot):

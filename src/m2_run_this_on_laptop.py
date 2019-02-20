@@ -125,33 +125,56 @@ def get_music_frames(window, mqtt_sender):
     songs_lable = ttk.Label(frame, text='Play built in songs')
     tempo_lable = ttk.Label(frame, text='tempo')
 
-    sans = ttk.Button(frame, text='Sans Undertale')
+    dropdown = ttk.Combobox(frame)
+    dropdown['values'] = ('Sans Undertale', 'All Star', 'Mobamba')
     dance_button = ttk.Button(frame, text='Dance')
     compose_music = ttk.Button(frame, text='Compose Music')
     read_music = ttk.Button(frame, text='Read Music')
     dame_tu_cosita = ttk.Button(frame, text='Dame tu Cosita')
 
+    bpm_dance_box = ttk.Entry(frame, width='8')
     tempo_box = ttk.Entry(frame, width='8')
     times_box = ttk.Entry(frame, width='8')
 
     frame_lable.grid(row=0, column=0)
     songs_lable.grid(row=1, column=0)
-    sans.grid(row=1, column=1)
+    dropdown.grid(row=1, column=1)
     times_box.grid(row=1, column=2)
     dance_button.grid(row=2, column=0)
+    bpm_dance_box.grid(row=2, column=1)
     compose_music.grid(row=3, column=0)
     read_music.grid(row=4, column=0)
     tempo_lable.grid(row=4, column=1)
     tempo_box.grid(row=4, column=2)
     dame_tu_cosita.grid(row=5, column=0)
 
-    sans['command'] = lambda :
+    dance_button['command'] = lambda : handle_dance(bpm_dance_box, mqtt_sender)
+    read_music['command'] = lambda : handle_read_music(tempo_box, mqtt_sender)
+    compose_music['command']=lambda : handle_write_music(mqtt_sender)
+    dame_tu_cosita['command'] = lambda : handle_dame_tu_cosita(mqtt_sender)
 
     return frame
 
 
-def handle
+def handle_play_prebuilt_music(song, times, mqtt_sender):
+    print('Playing song', song, times.get(), 'times')
+    mqtt_sender.send_message('play_prebuilt_music', [song, int(times.get())])
 
+def handle_dance(tempo, mqtt_sender):
+    print('Dancing at ', tempo, 'bpm')
+    mqtt_sender.send_message('dance', [tempo.get()])
+
+def handle_read_music(tempo, mqtt_sender):
+    print('Reading music')
+    mqtt_sender.send_message('read_music', [tempo.get()])
+
+def handle_write_music(mqtt_sender):
+    print('Writing Music')
+    mqtt_sender.send_message('write_music', [])
+
+def handle_dame_tu_cosita(mqtt_sender):
+    print('Calling dame tu cosita at 3 AM')
+    mqtt_sender.send_message('dame_tu_cosita', [])
 
 def handle_find_object_ir(freq, rate, mqtt_sender):
     print('Finding object', freq.get(), rate.get())
