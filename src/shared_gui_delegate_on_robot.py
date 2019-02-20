@@ -208,3 +208,16 @@ class Receiver(object):
     def m3_change_emotion(self, emotion):
         print("Change the Robot's Emotion")
         m3_extra.m3_change_emotion(self.robot, int(emotion))
+
+    def m3_emotion_camera(self, spin_dir):
+        print("Got Emotion Camera Spin")
+        m3_extra.m3_emotion_camera_pickup(self.robot, spin_dir)
+
+    def m3_emotion_color(self, speed):
+        print("Got Emotion by color", speed)
+        m3_extra.m3_emotion_by_color(self.robot, int(speed))
+
+    def m3_emotion_ir(self, speed):
+        print("Got Emotion Find", speed)
+        m3_extra.m3_emotion_find(self.robot, int(speed))
+

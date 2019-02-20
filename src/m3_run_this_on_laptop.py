@@ -181,12 +181,11 @@ def m3_get_sprint3_frame(window, mqtt_sender):
     heckle_button["command"] = lambda: handle_heckle(mqtt_sender)
     praise_button["command"] = lambda: handle_praise(mqtt_sender)
     change_emotion_button["command"] = lambda: handle_change_emotion(change_emotion_entry.get(), mqtt_sender)
+    emotion_find_clockbutton["command"] = lambda: handle_find_spin(0, mqtt_sender)
+    emotion_find_countbutton["command"] = lambda: handle_find_spin(1, mqtt_sender)
+    emotion_by_color_button["command"] = lambda: handle_emotion_color(sprint3_speed_entry.get(), mqtt_sender)
+    emotion_ir_find_button["command"] = lambda : handle_emotion_ir_find(sprint3_speed_entry.get(), mqtt_sender)
 
-    #IR_pickup_button["command"] = lambda: handle_IR_pickup(led_rateofchange.get(), sprint2_speed_entry.get(), mqtt_sender)
-    #camera_find_countbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
-    #                                                                  0, mqtt_sender)
-    #camera_find_clockbutton["command"] = lambda: handle_camera_pickup(led_rateofchange.get(), sprint2_speed_entry.get(),
-    #                                                                  1, mqtt_sender)
     return frame
 
 
@@ -222,6 +221,21 @@ def handle_praise(mqtt_sender):
 def handle_change_emotion(emotion, mqtt_sender):
     print("Handle Change Emotion")
     mqtt_sender.send_message('m3_change_emotion', [emotion])
+
+
+def handle_find_spin(spin_dir, mqtt_sender):
+    print("Handle Either Emotion spin clockwise/counterclockwise", spin_dir)
+    mqtt_sender.send_message('m3_emotion_camera', [spin_dir])
+
+
+def handle_emotion_color(speed, mqtt_sender):
+    print("Handle Emotion By Color")
+    mqtt_sender.send_message('m3_emotion_color', [speed])
+
+
+def handle_emotion_ir_find(speed, mqtt_sender):
+    print("Handle Emotion IR Find")
+    mqtt_sender.send_message('m3_emotion_ir', [speed])
 
 
 # -----------------------------------------------------------------------------
