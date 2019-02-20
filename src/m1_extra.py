@@ -42,20 +42,46 @@ def pick_up(robot):
 # This is the beginning of my Sprint 3 code
 ########################
 
+
+def new_moon(robot):
+    robot.sound_system.speech_maker.speak("I will now move in a circle to represent the new moon")
+    robot.drive_system.go(100,25)
+    time.sleep(4)
+    robot.drive_system.stop()
+
+
 def blue_danube():
     song = []
+    return song
+
+
+def praise_the_sun(robot):
+    robot.sound_system.speech_maker.speak("Praise the sun")
+    robot.arm_and_claw.raise_arm()
+    robot.drive_system.spin_clockwise_until_sees_object()
+    robot.sensor_system.camera.get_biggest_blob()
+
+
+def destroy_object(robot):
+    robot.sound_system.speech_maker.speak("Destroy object")
+    robot.drive_system.go_forward_until_distance_is_less_than(3,25)
+    robot.arm_and_claw.raise_arm()
+    robot.drive_system.go(100,-100)
+    robot.arm_and_claw.lower_arm()
+
 
 def special_moves(robot,num):
     if(num == 1):
-        robot.drive_system.go(100,50)
+        new_moon(robot)
     if(num == 2):
-        robot.sound_system.tone_maker.play_tone_sequence(blue_danube.song())
+       robot.sound_system.speech_maker.speak("I will now play Blue Danube")
+       robot.sound_system.tone_maker.play_tone_sequence(blue_danube())
     if(num == 3):
         pick_up(robot)
     if(num ==4):
-        print("yellow")
+        praise_the_sun(robot)
     if(num==5):
-        print("red")
+        destroy_object(robot)
     if(num == 6):
         print("white")
     if(num == 7):
