@@ -54,8 +54,8 @@ def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
             robot.arm_and_claw.raise_arm()
             break
 
-def dame_tu_cosita():
-    #find_object_ir(0, 100)
+def dame_tu_cosita(robot):
+    find_object_ir(robot, 0, 100)
     img = Image.open('dame.jpg')
     img.show()
     playsound('dame_music.mp3')

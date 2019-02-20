@@ -171,3 +171,23 @@ class Receiver(object):
     def m3_camera_pickup(self, rateofchange, speed, clockwiseorcounterclockwise):
         print("Got camera pickup", rateofchange, speed, clockwiseorcounterclockwise) 
         m3_extra.m3_camera_pickup(self.robot, int(rateofchange), int(speed), int(clockwiseorcounterclockwise))
+
+    def dame_tu_cosita(self):
+        print('Calling Dame tu Cosita')
+        m2_extra.dame_tu_cosita(self.robot)
+
+    def write_music(self):
+        print('Writing music')
+        m2_extra.write_music(self.robot)
+
+    def read_music(self, tempo):
+        print('Reading Music')
+        m2_extra.read_music(self.robot, tempo)
+
+    def dance(self, tempo, times):
+        print('Dance time')
+        m2_extra.dance(self.robot, tempo, times)
+
+    def play_prebuilt_music(self, song, times):
+        print('Music time')
+        m2_extra.play_prebuilt_music(self.robot, song, times)
