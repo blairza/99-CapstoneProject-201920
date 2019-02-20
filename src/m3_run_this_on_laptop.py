@@ -159,7 +159,7 @@ def m3_get_sprint3_frame(window, mqtt_sender):
                                                      "counterclockwise")
     emotion_by_color_button = ttk.Button(frame, text="Change the emotion by reading a color")
     emotion_ir_find_button = ttk.Button(frame, text="See if there is an object in front of the robot")
-    check_emotion_button = ttk.Button(frame, text="Open a new frame with the current emotion listed")
+    check_emotion_button = ttk.Button(frame, text="List the current emotion in the console")
 
 
     # Grid the widgets:
