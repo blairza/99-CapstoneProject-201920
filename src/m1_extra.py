@@ -67,7 +67,26 @@ def destroy_object(robot):
     robot.drive_system.go_forward_until_distance_is_less_than(3,25)
     robot.arm_and_claw.raise_arm()
     robot.drive_system.go(100,-100)
+    time.sleep(2)
+    robot.drive_system.stop()
     robot.arm_and_claw.lower_arm()
+
+
+def pick_up_and_move_it(robot):
+    robot.sound_system.speech_maker.speak("Moving an object")
+    robot.drive_system.spin_clockwise_until_sees_object()
+    robot.drive_system.go_forward_until_distance_is_less_than(3,25)
+    robot.arm_and_claw.raise_arm()
+    robot.drive_system.go(25,-25)
+    time.sleep(2)
+    robot.drive_system.stop()
+    robot.drive_system.go_straight_for_inches_using_time(10,50)
+
+
+def haiku(robot):
+    robot.sound_system.speech_maker.speak("I am a robot")
+    robot.sound_system.speech_maker.speak("I speak this haiku for you")
+    robot.sound_system.speech_maker.speak("Did you enjoy it")
 
 
 def special_moves(robot,num):
@@ -83,9 +102,9 @@ def special_moves(robot,num):
     if(num==5):
         destroy_object(robot)
     if(num == 6):
-        print("white")
+        pick_up_and_move_it(robot)
     if(num == 7):
-        print("brown")
+        haiku(robot)
 
 
 def color_trivia(robot,color,speed):
