@@ -44,6 +44,7 @@ def pick_up(robot):
 
 
 def new_moon(robot):
+    """The robot moves in a circle"""
     robot.sound_system.speech_maker.speak("I will now move in a circle to represent the new moon")
     robot.drive_system.go(100,25)
     time.sleep(4)
@@ -51,11 +52,13 @@ def new_moon(robot):
 
 
 def blue_danube():
+    """The robot plays the song Blue Danube"""
     song = [(261.63,500,100),(329.63,500,100),(392,500,100),(392,500,1000),(739.99,500,100),(739.99,500,1000),(659.25,500,100),(659.25,500,1000),(261.63,500,100),(261.63,500,100),(329.63,500,100),(392,500,100),(392,500,1000),(739.99,500,100),(739.99,500,1000),(698.46,500,100),(698.46,500,1000),(293.66,500,100),(293.66,500,100),(349.23,500,100),(440,500,100),(440,2000,100),(369.99,500,100),(392,500,100),(659.25,2000,100),(523.25,500,100),(329.63,500,100),(329.63,1000,100),(293.66,500,100),(440,1000,100),(392,500,100),(261.63,750,100),(261.63,250,100),(261.63,500,100),(261.63,500)]
     return song
 
 
 def praise_the_sun(robot):
+    """Robot raises its arm and spins to praise the sun"""
     robot.sound_system.speech_maker.speak("Praise the sun")
     robot.arm_and_claw.raise_arm()
     robot.drive_system.spin_clockwise_until_sees_object()
@@ -63,6 +66,7 @@ def praise_the_sun(robot):
 
 
 def destroy_object(robot):
+    """The robot simulates disorienting an object to destroy it"""
     robot.sound_system.speech_maker.speak("Destroy object")
     robot.drive_system.go_forward_until_distance_is_less_than(3,25)
     robot.arm_and_claw.raise_arm()
@@ -73,6 +77,7 @@ def destroy_object(robot):
 
 
 def pick_up_and_move_it(robot):
+    """Robot picks up and moves an object"""
     robot.sound_system.speech_maker.speak("Moving an object")
     robot.drive_system.spin_clockwise_until_sees_object(25,1400)
     robot.drive_system.go_forward_until_distance_is_less_than(3,25)
@@ -84,12 +89,14 @@ def pick_up_and_move_it(robot):
 
 
 def haiku(robot):
+    """Robot says a haiku"""
     robot.sound_system.speech_maker.speak("I am a robot").wait()
     robot.sound_system.speech_maker.speak("I speak this haiku for you").wait()
     robot.sound_system.speech_maker.speak("Did you enjoy it").wait()
 
 
 def special_moves(robot,num):
+    """Calls all the actions that the robot does"""
     if(num == 1):
         new_moon(robot)
     if(num == 2):
@@ -108,7 +115,9 @@ def special_moves(robot,num):
 
 
 def color_trivia(robot,color,speed):
-    """:type robot : rb.RoseBot"""
+    """:type robot : rb.RoseBot
+    Main function that says a fact and does an action depending on the color that is seen by the color sensor"""
+    
     color_list = ["One old wives’ tale claims that if a woman is buried wearing the color black, she’ll come back to haunt the family","Blue birds cannot see the color blue","Green was a sacred color to the Egyptians representing the hope and joy of spring","In Japan yellow represents courage","The color red does not make bulls angry because they are colorblind","The sun is actually white but looks yellow because of refraction","Too much of the color brown can act as a depressant"]
     robot.drive_system.go_straight_until_color_is(color,speed)
     print(robot.sensor_system.color_sensocar.get_color())
