@@ -108,7 +108,7 @@ def m3_clockwise_until_sees_object(rosebot, speed, area):
     rosebot.drive_system.left_motor.turn_on(speed)
     rosebot.drive_system.right_motor.turn_on(-1 * speed)
     timespent = 0
-    while timespent < 1000:
+    while timespent < 500:
         if rosebot.sensor_system.camera.get_biggest_blob().get_area() > area:
             rosebot.drive_system.stop()
             return True
@@ -128,7 +128,7 @@ def m3_counterclockwise_until_sees_object(rosebot, speed, area):
     rosebot.drive_system.left_motor.turn_on(-1*speed)
     rosebot.drive_system.right_motor.turn_on(speed)
     timespent = 0
-    while timespent < 1000:
+    while timespent < 500:
         if rosebot.sensor_system.camera.get_biggest_blob().get_area() > area:
             rosebot.drive_system.stop()
             return True

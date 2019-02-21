@@ -74,7 +74,7 @@ def destroy_object(robot):
 
 def pick_up_and_move_it(robot):
     robot.sound_system.speech_maker.speak("Moving an object")
-    robot.drive_system.spin_clockwise_until_sees_object()
+    robot.drive_system.spin_clockwise_until_sees_object(25,1400)
     robot.drive_system.go_forward_until_distance_is_less_than(3,25)
     robot.arm_and_claw.raise_arm()
     robot.drive_system.go(25,-25)
@@ -84,9 +84,9 @@ def pick_up_and_move_it(robot):
 
 
 def haiku(robot):
-    robot.sound_system.speech_maker.speak("I am a robot")
-    robot.sound_system.speech_maker.speak("I speak this haiku for you")
-    robot.sound_system.speech_maker.speak("Did you enjoy it")
+    robot.sound_system.speech_maker.speak("I am a robot").wait()
+    robot.sound_system.speech_maker.speak("I speak this haiku for you").wait()
+    robot.sound_system.speech_maker.speak("Did you enjoy it").wait()
 
 
 def special_moves(robot,num):
@@ -114,6 +114,7 @@ def color_trivia(robot,color,speed):
     print(robot.sensor_system.color_sensocar.get_color())
     for k in range (1,8):
         if(robot.sensor_system.color_sensocar.get_color() == k):
+            robot.drive_system.stop()
             robot.sound_system.speech_maker.speak("Fun fact")
             time.sleep(0.1)
             robot.sound_system.speech_maker.speak(color_list[k-1])
