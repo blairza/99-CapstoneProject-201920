@@ -225,6 +225,8 @@ def play_prebuilt_music(robot, song, times):
 
 
 def play_music(robot, notes, lengths, tempo):
+    # Takes in a robot, two lists and an integer
+    #Plays each note in the list for the corresponding lenght at the tempo given
     tick = (60 / tempo)*1000
     print(len(notes))
     print(len(lengths))
@@ -234,6 +236,8 @@ def play_music(robot, notes, lengths, tempo):
 
 
 def note_finder(note):
+    #Takes in a string
+    #Returns the corresponding frequency (int)
     note_matrix = {
         'B0':31,
         'C1':33,
