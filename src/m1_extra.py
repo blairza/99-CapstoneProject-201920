@@ -84,9 +84,9 @@ def pick_up_and_move_it(robot):
 
 
 def haiku(robot):
-    robot.sound_system.speech_maker.speak("I am a robot")
-    robot.sound_system.speech_maker.speak("I speak this haiku for you")
-    robot.sound_system.speech_maker.speak("Did you enjoy it")
+    robot.sound_system.speech_maker.speak("I am a robot").wait()
+    robot.sound_system.speech_maker.speak("I speak this haiku for you").wait()
+    robot.sound_system.speech_maker.speak("Did you enjoy it").wait()
 
 
 def special_moves(robot,num):
