@@ -148,7 +148,6 @@ def get_music_frames(window, mqtt_sender):
     read_music.grid(row=4, column=0)
     tempo_lable.grid(row=4, column=1)
     tempo_box.grid(row=4, column=2)
-    dame_tu_cosita.grid(row=5, column=0)
 
     dance_button['command'] = lambda : handle_dance(bpm_dance_box, times_dance_box, mqtt_sender)
     read_music['command'] = lambda : handle_read_music(tempo_box, mqtt_sender)

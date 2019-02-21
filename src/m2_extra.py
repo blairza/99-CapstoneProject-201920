@@ -7,10 +7,12 @@ import time
 import math
 import random
 from PIL import Image
-#from playsound import playsound
+
 
 
 def find_object_ir(robot, starting_frequency, rate_of_increase):
+    #Takes in a rosebot, starting frequency(int) and rate of increase(int)
+    #Makes the robot find an object and as it gets closer the frequency of the beep increases
     robot.drive_system.go(50, 50)
     frequency = starting_frequency
     while True:
@@ -31,6 +33,9 @@ def find_object_ir(robot, starting_frequency, rate_of_increase):
 
 
 def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
+    #Takes in a rosebot, starting frequency, rate of increase, and a number either 0 or 1.
+    #If clockwise is 1 then the robot will rotate clockwise until it sees and ohject, then go towards it. If
+    #clockwise is 0, it will spin counterclockwise and go find the object
     robot.arm_and_claw.raise_arm()
     if clockwise == 1:
        robot.drive_system.spin_clockwise_until_sees_object(25, 700)
@@ -55,21 +60,18 @@ def find_object_camera(robot, starting_frequency, rate_of_increase, clockwise):
             break
 
 
-def dame_tu_cosita():
-#    #find_object_ir(robot, 0, 100)
-#    img = Image.open('dame.jpg')
-#    img.show()
-#    playsound('dame_music.mp3')
-    pass
+
 
 
 
 def write_music(robot):
+    #Takes in a rosebot. Uses the camera to detect a color. If more of SIG1s color is seenm it will randomly choose notes
+    #in a minor key to play. If more of the other color is seen, it will do the same for a major key.
     key = 0
     bpm = 100
-    robot.sensor_system.camera.set_signature('SIG1')
-    happy_color = robot.sensor_system.camera.get_biggest_blob().get_area()
     robot.sensor_system.camera.set_signature('SIG2')
+    happy_color = robot.sensor_system.camera.get_biggest_blob().get_area()
+    robot.sensor_system.camera.set_signature('SIG1')
     sad_color = robot.sensor_system.camera.get_biggest_blob().get_area()
 
     if happy_color >= sad_color:
@@ -82,7 +84,7 @@ def write_music(robot):
 
     for k in range(15):
         note = 0
-        number = random.randint(1, 11)
+        number = random.randint(1, 10)
         interval = intervals(number)
         note = note + interval
         if note > 7:
@@ -92,10 +94,12 @@ def write_music(robot):
         notes.append(scale[note])
         lengths.append(random.randint(1, 5))
 
-    play_music(notes, lengths, bpm)
+    play_music(robot, notes, lengths, bpm)
 
 
 def get_scale(key):
+    #Takes in an int either 1 or 0.
+    #If it is 1, returns a tuple containing the notes of the major scale and if it is 0 returns the minor scale
     major_scale = (  'C4',
                      'D4',
                      'E4',
@@ -123,6 +127,9 @@ def get_scale(key):
 
 
 def intervals(int):
+    #Takes in an int 1-10.
+    #Returns the coresponding interval value
+
     interval={1:1,
               2:2,
               3:3,
@@ -134,9 +141,12 @@ def intervals(int):
               9:-4,
               10:-5
     }
-    return interval(int)
+    return interval[int]
 
 def read_music(robot, tempo):
+    #Takes in a rosebot and int, tempo.
+    #Uses the color sensor to read a color every time the color changes.
+    #Plays notes based on the color
     colors = []
     notes = []
     lengths = []
@@ -161,6 +171,8 @@ def read_music(robot, tempo):
 
 
 def color_to_note(color):
+    #Takes in an int representing a color from the sensor
+    #Returns the corresponding note
     color_matrix = {1: 'C4',
                     2: 'D4',
                     3: 'E4',
@@ -174,6 +186,8 @@ def color_to_note(color):
 
 
 def dance(robot, bpm, times):
+    #Takes in a robot a bpm int and a times int.
+    # The robot will shake it's booty at the bpm for however many times that times is.
     beat = 60/bpm
     for k in range(times):
         robot.drive_system.go(100, -100)
@@ -182,15 +196,32 @@ def dance(robot, bpm, times):
         robot.drive_system.go(-100, 100)
         time.sleep(beat)
         robot.drive_system.stop()
-        robot.arm_and_claw.move_arm_to_position(500)
+        robot.drive_system.go(100, 100)
         time.sleep(beat)
+        robot.drive_system.stop()
+        robot.drive_system.go(-100, -100)
+        robot.drive_system.stop()
+
 
 
 def play_prebuilt_music(robot, song, times):
+    #Takes in a rosebot, song (int 0-2), and times (int)
+    #Plays a song on the rosebot and uses the song variable to select a song.
+
+    more_bamba = [('C4', 'C4', 'F4', 'FS4', 'C4', 'C4', 'C4', 'F4'), (0.5, 1, 8, 3, 2, 1, 1, 8)]
+    all_star = [('B4', 'G4', 'G4', 'E4', 'G4', 'G4', 'G4', 'E4', 'G4', 'G4', 'G4', 'B4'), (1, 2, 0.5, 0.5, 1, 2, 0.5, 0.5, 1, 2, 2, 1)]
     sans_undertale = [('D4', 'D4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'C4', 'C4', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'B3', 'B3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4', 'AS3', 'AS3', 'D5', 'A4', 'GS4', 'G4', 'F4', 'D4', 'F4', 'G4'), (0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25,0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25,0.25, 0.25, 0.5, 0.375, 0.5, 0.5, 0.5, 0.25, 0.25, 0.25)]
     if song == 0:
         for k in range(times):
-            play_music(robot, sans_undertale[0], sans_undertale[1], 120)
+            play_music(robot, sans_undertale[0], sans_undertale[1], 240)
+
+    if song == 1:
+        for k in range(times):
+            play_music(robot, all_star[0], all_star[1], 200)
+
+    if song == 2:
+        for k in range(times):
+            play_music(robot, more_bamba[0], more_bamba[1], 180)
 
 
 def play_music(robot, notes, lengths, tempo):
@@ -296,8 +327,4 @@ def note_finder(note):
     }
     return note_matrix[note]
 
-def test():
-    note_finder('D8')
-    dame_tu_cosita()
 
-test()
