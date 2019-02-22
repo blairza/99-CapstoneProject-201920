@@ -117,7 +117,6 @@ def special_moves(robot,num):
 def color_trivia(robot,color,speed):
     """:type robot : rb.RoseBot
     Main function that says a fact and does an action depending on the color that is seen by the color sensor"""
-    
     color_list = ["One old wives’ tale claims that if a woman is buried wearing the color black, she’ll come back to haunt the family","Blue birds cannot see the color blue","Green was a sacred color to the Egyptians representing the hope and joy of spring","In Japan yellow represents courage","The color red does not make bulls angry because they are colorblind","The sun is actually white but looks yellow because of refraction","Too much of the color brown can act as a depressant"]
     robot.drive_system.go_straight_until_color_is(color,speed)
     print(robot.sensor_system.color_sensocar.get_color())
